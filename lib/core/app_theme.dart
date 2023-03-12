@@ -8,11 +8,13 @@ abstract class APPTHEMES {
     primaryColor: ColorsManager.kprimaryColor,
     scaffoldBackgroundColor: Colors.white,
     fontFamily: 'SourceSansPro',
-    textTheme: const TextTheme(
-        //onBoarding title
-        displayLarge: TextStyle(
-            fontSize: 35, fontWeight: FontWeight.w900, color: Colors.black),
-        displayMedium: TextStyle(fontSize: 25, color: Colors.black)),
+    textTheme: TextTheme(
+      //onBoarding title & auth(login) with edits
+      displayLarge: TextStyle(
+          fontSize: 35.sp, fontWeight: FontWeight.w900, color: Colors.black),
+      displayMedium: TextStyle(fontSize: 25.sp, color: Colors.black),
+      displaySmall: TextStyle(fontSize: 15.sp, color: Colors.black),
+    ),
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.white,
@@ -27,10 +29,13 @@ abstract class APPTHEMES {
     primaryColor: ColorsManager.kprimaryColor,
     fontFamily: 'SourceSansPro',
     textTheme: TextTheme(
-        //onBoarding title
-        displayLarge: TextStyle(
-            fontSize: 35.sp, fontWeight: FontWeight.w900, color: Colors.white),
-        displayMedium: TextStyle(fontSize: 25.sp, color: Colors.white)),
+      //onBoarding title & auth(login) with edits
+      displayLarge: TextStyle(
+          fontSize: 35.sp, fontWeight: FontWeight.w900, color: Colors.white),
+      //onBoarding body
+      displayMedium: TextStyle(fontSize: 25.sp, color: Colors.white),
+      displaySmall: TextStyle(fontSize: 15.sp, color: Colors.white),
+    ),
     scaffoldBackgroundColor: Colors.black,
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle(

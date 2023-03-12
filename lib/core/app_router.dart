@@ -10,7 +10,7 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: Routes.loginview,
-      builder: (context, state) => const LoginView(),
+      builder: (context, state) =>  LoginView(),
     ),
   ]);
 }
