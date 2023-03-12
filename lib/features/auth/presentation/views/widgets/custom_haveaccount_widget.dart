@@ -23,7 +23,7 @@ class CustomhaveAccountWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.displaySmall!,
         ),
         SizedBox(
-          width:5.w,
+          width:3.w,
         ),
         TextButton(
           onPressed: onpressed,

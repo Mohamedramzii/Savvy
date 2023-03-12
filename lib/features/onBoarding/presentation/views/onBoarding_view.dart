@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:xstore_cubit/core/app_managers/app_router.dart';
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
+import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
 import 'package:xstore_cubit/features/onBoarding/presentation/views/widgets/pageview_item.dart';
+import '../../../../core/constants.dart';
+import '../../../../core/networks/local/cache_helper.dart';
 import '../../data/models/onBoarding_model.dart';
 import 'widgets/floating_Button_widget.dart';
 import 'widgets/smooth_indicator_widget.dart';
@@ -29,14 +29,23 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           actions: [
             IconButton(
               onPressed: () =>
-                  GoRouter.of(context).pushReplacement(Routes.loginview),
+                  CacheHelper.saveData(key: 'OnBoarding', value: true)
+                      .then((value) {
+                if (value) {
+                  // print(value);
+                  Navigation.navigationWithoutReturn(context,
+                      screen: LoginView());
+                }
+              }),
               icon: Text(
                 'SKIP',
                 style: TextStyle(
                     color: ColorsManager.kprimaryColor, fontSize: 15.sp),
               ),
             ),
-            SizedBox(width:width * 0.04 ,)
+            SizedBox(
+              width: width * 0.04,
+            )
           ],
         ),
         body: Column(
@@ -81,4 +90,5 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           ],
         ));
   }
+
 }

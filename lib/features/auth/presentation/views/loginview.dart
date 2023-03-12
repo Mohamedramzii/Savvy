@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:xstore_cubit/core/app_managers/app_router.dart';
 import 'package:xstore_cubit/features/auth/presentation/view_model/cubits/LOGIN_CUBIT/login_cubit.dart';
+import 'package:xstore_cubit/features/auth/presentation/views/registerview.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toast_Widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_button_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_haveaccount_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_textformfield_widget.dart';
+
+import '../../../../core/constants.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});
@@ -53,7 +58,7 @@ class LoginView extends StatelessWidget {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text('Login now and enjoy with our offers!',
+                          Text('Login now and enjoy our offers!',
                               style: Theme.of(context).textTheme.displayMedium),
                           SizedBox(
                             height: 20.h,
@@ -139,7 +144,10 @@ class LoginView extends StatelessWidget {
                           CustomhaveAccountWidget(
                             text: 'Don\'t have an account?',
                             toText: 'REGISTER',
-                            onpressed: () {},
+                            onpressed: () {
+                              Navigation.navigationWithReturn(context,
+                                  screen: const RegisterView());
+                            },
                           ),
                         ],
                       ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
 
-import '../../../../../core/app_managers/app_router.dart';
+import '../../../../../core/constants.dart';
+import '../../../../../core/networks/local/cache_helper.dart';
 
 class OnBordingFloatingButtonWidget extends StatelessWidget {
   const OnBordingFloatingButtonWidget({
@@ -15,16 +16,19 @@ class OnBordingFloatingButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-                      onPressed: () {
-                        if (isLast) {
-                          GoRouter.of(context)
-                              .pushReplacement(Routes.loginview);
-                        } else {
-                          controller.nextPage(
-                              duration: const Duration(milliseconds: 750),
-                              curve: Curves.easeInCirc);
-                        }
-                      },
-                      child: const Icon(Icons.arrow_forward_ios));
+        onPressed: () {               
+          if (isLast) {
+            CacheHelper.saveData(key: 'OnBoarding', value: true).then((value) {
+              if (value) {
+               Navigation.navigationWithoutReturn(context, screen: LoginView());
+              }
+            });
+          } else {
+            controller.nextPage(
+                duration: const Duration(milliseconds: 750),
+                curve: Curves.fastLinearToSlowEaseIn);
+          }
+        },
+        child: const Icon(Icons.arrow_forward_ios));
   }
 }

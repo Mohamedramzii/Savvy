@@ -22,3 +22,4 @@ class LoginFailureState extends LoginState {
 }
 
 class LoginVisibilityIconState extends LoginState {}
+
