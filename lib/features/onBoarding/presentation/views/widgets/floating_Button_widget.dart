@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/app_router.dart';
+import '../../../../../core/app_managers/app_router.dart';
 
 class OnBordingFloatingButtonWidget extends StatelessWidget {
   const OnBordingFloatingButtonWidget({

@@ -1,4 +1,4 @@
-import 'package:xstore_cubit/core/assets_manager.dart';
+import 'package:xstore_cubit/core/app_managers/assets_manager.dart';
 
 class OnBoardingModel {
   final String image;

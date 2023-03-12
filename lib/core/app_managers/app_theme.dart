@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:xstore_cubit/core/color_manager.dart';
+import 'package:xstore_cubit/core/app_managers/color_manager.dart';
 
 abstract class APPTHEMES {
   static ThemeData lightMode = ThemeData(
