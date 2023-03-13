@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:xstore_cubit/core/app_managers/color_manager.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:lottie/lottie.dart';
 
+import '../../../../../core/app_managers/assets_manager.dart';
 import '../../../data/models/home_model/home_model.dart';
 
 class ProductsGridViewItemsWidget extends StatelessWidget {
@@ -25,14 +27,16 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
           Stack(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: Image.network(
-                  homeModel.data!.products![index].image!,
-                  width: double.infinity,
-                  height: 180.h,
-                  fit: BoxFit.fill,
-                ),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: CachedNetworkImage(
+                    imageUrl: homeModel.data!.products![index].image!,
+                     width: double.infinity,
+                    height: 180.h,
+                    fit: BoxFit.fill,
+                    placeholder: (context, url) =>
+                        Lottie.asset(ImagesManager.imageLoading2),
+                  )
+                  ),
               if (homeModel.data!.products![index].discount != 0)
                 Align(
                   alignment: Alignment.topLeft,
@@ -59,7 +63,6 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.w),
             child: Row(

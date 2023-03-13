@@ -49,7 +49,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) => BlocProvider<HomeCubit>(
-        create: (context) => HomeCubit()..getHomeData(),
+        create: (context) {
+          return HomeCubit()..getHomeData()..getHomeCategories();
+        },
         child: MaterialApp(
             // routerConfig: AppRouter.router,
             debugShowCheckedModeBanner: false,

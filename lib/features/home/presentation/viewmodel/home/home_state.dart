@@ -22,3 +22,13 @@ class HomeFailureState extends HomeState {
     required this.errMessage,
   });
 }
+
+class HomeCategoriesLoadingState extends HomeState{}
+class HomeCategoriesSuccessState extends HomeState{}
+class HomeCategoriesFailureState extends HomeState {
+  final String errMessage;
+  HomeCategoriesFailureState({
+    required this.errMessage,
+  });
+
+}

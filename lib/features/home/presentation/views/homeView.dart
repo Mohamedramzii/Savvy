@@ -18,10 +18,13 @@ class HomeView extends StatelessWidget {
         return Conditional.single(
           context: context,
           conditionBuilder: (context) {
-            return homeCubit.homeModel != null;
+            return homeCubit.homeModel != null && homeCubit.homeCategoriesModel != null;
           },
           widgetBuilder: (context) {
-            return HomeViewBody(homeModel: homeCubit.homeModel!);
+            return HomeViewBody(
+              homeModel: homeCubit.homeModel!,
+              homeCategoriesModel: homeCubit.homeCategoriesModel!,
+            );
           },
           fallbackBuilder: (context) {
             return Center(

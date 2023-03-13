@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 abstract class EndPoints {
   static const LOGIN = 'login';
   static const HOME = 'home';
+  static const HOME_CATEGORIES = 'categories';
 }
 
 class Navigation {
