@@ -23,11 +23,21 @@ class HomeFailureState extends HomeState {
   });
 }
 
-class HomeCategoriesLoadingState extends HomeState{}
-class HomeCategoriesSuccessState extends HomeState{}
-class HomeCategoriesFailureState extends HomeState {
+
+class HomeFavoriteSwitchSuccessState extends HomeState{}
+class HomeFavoriteSuccessState extends HomeState {
+  final FavoriteIConModel favoriteIConModel;
+  HomeFavoriteSuccessState({
+    required this.favoriteIConModel,
+  });
+
+
+}
+
+
+class HomeFavoriteFailureState extends HomeState {
   final String errMessage;
-  HomeCategoriesFailureState({
+  HomeFavoriteFailureState({
     required this.errMessage,
   });
 

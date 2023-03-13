@@ -5,11 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xstore_cubit/core/app_managers/app_theme.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
+import 'package:xstore_cubit/features/favorite/presentation/viewmodel/Cubits/cubit/favorite_cubit.dart';
 import 'package:xstore_cubit/features/home/presentation/viewmodel/home/home_cubit.dart';
 import 'package:xstore_cubit/features/home/presentation/views/home_layout.dart';
 
 import 'core/constants.dart';
 import 'core/networks/local/cache_helper.dart';
+import 'features/categories/presentation/viewmodel/cubits/categories_Cubit/categories_cubit.dart';
 import 'features/onBoarding/presentation/views/onBoarding_view.dart';
 
 void main() async {
@@ -48,10 +50,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder: (context, child) => BlocProvider<HomeCubit>(
-        create: (context) {
-          return HomeCubit()..getHomeData()..getHomeCategories();
-        },
+      builder: (context, child) => MultiBlocProvider(
+        providers: [
+          BlocProvider<HomeCubit>(
+            create: (context) {
+              return HomeCubit()..getHomeData(context);
+            },
+          ),
+          BlocProvider<CategoriesCubit>(
+            create: (context) => CategoriesCubit()..getHomeCategories(),
+          ),
+        
+        ],
         child: MaterialApp(
             // routerConfig: AppRouter.router,
             debugShowCheckedModeBanner: false,

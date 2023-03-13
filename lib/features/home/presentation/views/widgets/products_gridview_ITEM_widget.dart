@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
+import 'package:xstore_cubit/features/home/presentation/viewmodel/home/home_cubit.dart';
 
 import '../../../../../core/app_managers/assets_manager.dart';
 import '../../../data/models/home_model/home_model.dart';
@@ -30,13 +32,12 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 5.w),
                   child: CachedNetworkImage(
                     imageUrl: homeModel.data!.products![index].image!,
-                     width: double.infinity,
+                    width: double.infinity,
                     height: 180.h,
                     fit: BoxFit.fill,
                     placeholder: (context, url) =>
                         Lottie.asset(ImagesManager.imageLoading2),
-                  )
-                  ),
+                  )),
               if (homeModel.data!.products![index].discount != 0)
                 Align(
                   alignment: Alignment.topLeft,
@@ -89,10 +90,20 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
                 Expanded(
                   child: IconButton(
                     padding: EdgeInsets.zero,
-                    onPressed: () {},
-                    icon: const Icon(Icons.favorite_border),
+                    onPressed: () {
+                      BlocProvider.of<HomeCubit>(context).changeFavorite(
+                          productID: homeModel.data!.products![index].id!);
+                    },
+                    icon: BlocProvider.of<HomeCubit>(context).favorites[
+                                homeModel.data!.products![index].id] ==
+                            true
+                        ? const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          )
+                        : const Icon(Icons.favorite_border),
                   ),
-                ),
+                )
               ],
             ),
           )

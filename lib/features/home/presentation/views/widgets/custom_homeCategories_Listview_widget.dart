@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:xstore_cubit/features/home/data/models/homeCategoriesModel.dart';
+import 'package:xstore_cubit/features/categories/data/models/homeCategoriesModel.dart';
 
 import 'custom_homeCategories_widget.dart';
 

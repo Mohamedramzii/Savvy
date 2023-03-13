@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xstore_cubit/core/app_managers/assets_manager.dart';
-import '../../../data/models/homeCategoriesModel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../../../categories/data/models/homeCategoriesModel.dart';
 
 class CustomHomeCategoriesItem extends StatelessWidget {
   const CustomHomeCategoriesItem({

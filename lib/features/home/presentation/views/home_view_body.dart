@@ -6,7 +6,7 @@ import 'package:xstore_cubit/features/home/presentation/views/widgets/custom_car
 import 'package:xstore_cubit/features/home/presentation/views/widgets/custom_homeCategories_Listview_widget.dart';
 import 'package:xstore_cubit/features/home/presentation/views/widgets/products_gridview_widget.dart';
 
-import '../../data/models/homeCategoriesModel.dart';
+import '../../../categories/data/models/homeCategoriesModel.dart';
 import '../../data/models/home_model/home_model.dart';
 
 class HomeViewBody extends StatelessWidget {
