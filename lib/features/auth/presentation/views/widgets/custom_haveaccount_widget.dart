@@ -23,16 +23,15 @@ class CustomhaveAccountWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.displaySmall!,
         ),
         SizedBox(
-          width:3.w,
+          width: 3.w,
         ),
         TextButton(
           onPressed: onpressed,
           child: Text(
             toText,
-            style: Theme.of(context)
-                .textTheme
-                .displaySmall!
-                .copyWith(color: ColorsManager.kprimaryColor,decoration: TextDecoration.underline),
+            style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                color: ColorsManager.kprimaryColor,
+                decoration: TextDecoration.underline),
           ),
         )
       ],

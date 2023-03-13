@@ -4,12 +4,14 @@ import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:xstore_cubit/core/app_managers/app_router.dart';
+import 'package:xstore_cubit/core/networks/local/cache_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/view_model/cubits/LOGIN_CUBIT/login_cubit.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/registerview.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toast_Widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_button_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_haveaccount_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_textformfield_widget.dart';
+import 'package:xstore_cubit/features/home/presentation/views/home_layout.dart';
 
 import '../../../../core/constants.dart';
 
@@ -28,8 +30,18 @@ class LoginView extends StatelessWidget {
           listener: (context, state) {
             if (state is LoginSuccessState) {
               if (state.loginModel.status!) {
+                // Login is done
                 CustomToastWidget.getToast(
                     text: state.loginModel.message!, color: Colors.green);
+
+                // then we catch user token
+                CacheHelper.saveData(
+                    key: tokenKey, value: state.loginModel.userData!.token);
+                debugPrint(state.loginModel.userData!.token);
+
+                // then we navigate to our home layout
+                Navigation.navigationWithoutReturn(context,
+                    screen: const HomeLayout());
               } else {
                 CustomToastWidget.getToast(
                     text: state.loginModel.message!, color: Colors.red);

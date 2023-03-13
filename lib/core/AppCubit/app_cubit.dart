@@ -8,9 +8,6 @@ part 'app_state.dart';
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitial());
 
-
-
-  
   // bool isOnBoarding = false;
   // void modeChange({bool? fromshared}) {
   //   if (fromshared != null) {

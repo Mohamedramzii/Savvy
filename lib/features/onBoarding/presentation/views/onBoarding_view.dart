@@ -29,7 +29,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           actions: [
             IconButton(
               onPressed: () =>
-                  CacheHelper.saveData(key: 'OnBoarding', value: true)
+                  CacheHelper.saveData(key: onBoardingKey, value: true)
                       .then((value) {
                 if (value) {
                   // print(value);
@@ -90,5 +90,4 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           ],
         ));
   }
-
 }

@@ -14,7 +14,10 @@ class OnBoardingPageViewItemWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(child: Image.asset(data.image,)),
+        Expanded(
+            child: Image.asset(
+          data.image,
+        )),
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: Text(

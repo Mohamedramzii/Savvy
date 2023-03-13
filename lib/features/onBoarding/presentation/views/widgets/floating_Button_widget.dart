@@ -16,11 +16,12 @@ class OnBordingFloatingButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        onPressed: () {               
+        onPressed: () {
           if (isLast) {
-            CacheHelper.saveData(key: 'OnBoarding', value: true).then((value) {
+            CacheHelper.saveData(key: onBoardingKey, value: true).then((value) {
               if (value) {
-               Navigation.navigationWithoutReturn(context, screen: LoginView());
+                Navigation.navigationWithoutReturn(context,
+                    screen: LoginView());
               }
             });
           } else {

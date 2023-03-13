@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 abstract class EndPoints {
   static const LOGIN = 'login';
+  static const HOME = 'home';
 }
 
 class Navigation {
@@ -21,3 +22,7 @@ class Navigation {
     ));
   }
 }
+
+const onBoardingKey = 'OnBoarding';
+const tokenKey = 'token';
+String tokenHolder = '';
