@@ -27,4 +27,4 @@ class Navigation {
 
 const onBoardingKey = 'OnBoarding';
 const tokenKey = 'token';
-String tokenHolder = '';
+String? tokenHolder = '';

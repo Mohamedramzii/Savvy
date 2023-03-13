@@ -5,6 +5,9 @@ abstract class HomeState {}
 
 class HomeInitial extends HomeState {}
 
+
+//HOME
+
 class HomeLayoutchangeState extends HomeState {}
 
 class HomeLoadingState extends HomeState {}
@@ -23,22 +26,48 @@ class HomeFailureState extends HomeState {
   });
 }
 
+//-----------------------------------------------------------------
 
-class HomeFavoriteSwitchSuccessState extends HomeState{}
-class HomeFavoriteSuccessState extends HomeState {
+
+//Fav
+
+class HomeFavoriteChangeLoadingState extends HomeState {}
+// class HomeFavoriteDeletedSuccessState extends HomeState {}
+
+class HomeFavoriteChangeSuccessState extends HomeState {
   final FavoriteIConModel favoriteIConModel;
-  HomeFavoriteSuccessState({
+  HomeFavoriteChangeSuccessState({
     required this.favoriteIConModel,
   });
-
-
 }
 
-
-class HomeFavoriteFailureState extends HomeState {
+class HomeFavoriteChangeFailureState extends HomeState {
   final String errMessage;
-  HomeFavoriteFailureState({
+  HomeFavoriteChangeFailureState({
     required this.errMessage,
   });
-
 }
+
+//-----------------------------------------------------
+
+
+//CATEGORIES
+class HomeCategoriesSuccessState extends HomeState {}
+
+class HomeCategoriesFailureState extends HomeState {
+  final String errMessage;
+  HomeCategoriesFailureState({
+    required this.errMessage,
+  });
+}
+
+///-------------------------------------------------
+
+//fav
+class FavoriteGetLoadingState extends HomeState {}
+
+class FavoriteGetSuccessState extends HomeState {}
+
+class FavoriteGetFailureState extends HomeState {}
+
+// class FavoriteItemDeletedSuccessState extends HomeState {}

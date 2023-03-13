@@ -55,13 +55,15 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
                 )
             ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 3.h),
-            child: Text(
-              homeModel.data!.products![index].name!,
-              style: Theme.of(context).textTheme.displaySmall,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 3.h),
+              child: Text(
+                homeModel.data!.products![index].name!,
+                style: Theme.of(context).textTheme.displaySmall,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
           Padding(

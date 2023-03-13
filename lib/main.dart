@@ -53,14 +53,14 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MultiBlocProvider(
         providers: [
           BlocProvider<HomeCubit>(
-            create: (context) {
-              return HomeCubit()..getHomeData(context);
-            },
+            create: (context) => HomeCubit()
+              ..getHomeData()
+              ..getHomeCategories()
+              ..getFavorites(),
           ),
-          BlocProvider<CategoriesCubit>(
-            create: (context) => CategoriesCubit()..getHomeCategories(),
-          ),
-        
+          // BlocProvider<FavoriteCubit>(
+          //   create: (context) => FavoriteCubit(),
+          // ),
         ],
         child: MaterialApp(
             // routerConfig: AppRouter.router,

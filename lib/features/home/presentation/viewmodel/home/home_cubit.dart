@@ -1,10 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xstore_cubit/core/constants.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
-import 'package:xstore_cubit/features/favorite/presentation/viewmodel/Cubits/cubit/favorite_cubit.dart';
 import 'package:xstore_cubit/features/home/data/models/favoriteIconModel.dart';
 import '../../../../cart/presentation/views/cartView.dart';
+import '../../../../categories/data/models/homeCategoriesModel.dart';
+import '../../../../favorite/data/models/favoriteModel.dart';
 import '../../../../favorite/presentation/views/favoriteView.dart';
 import '../../../../settings/presentation/views/settingsView.dart';
 import '../../../data/models/home_model/home_model.dart';
@@ -13,6 +16,16 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
+
+  // FavoriteCubit favoriteCubit;
+  Timer? timer;
+  Widget initTimer(widget) {
+    Widget currentWidget = widget;
+    timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      currentWidget;
+    });
+    return currentWidget;
+  }
 
   int currentIndex = 0;
 
@@ -25,13 +38,14 @@ class HomeCubit extends Cubit<HomeState> {
 
   void PageViewChange({required int index}) {
     currentIndex = index;
+    // if (currentIndex == 2) getFavorites();
     emit(HomeLayoutchangeState());
   }
 
   HomeModel? homeModel;
   Map<int, bool> favorites = {};
 
-  getHomeData(context) async {
+  getHomeData() async {
     emit(HomeLoadingState());
 
     if (homeModel == null) {
@@ -53,43 +67,76 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  //FAVORITES
+
+  FavoriteModel? favoriteModel;
+
+  getFavorites() {
+    emit(FavoriteGetLoadingState());
+
+    DioHelper.getData(url: EndPoints.HOME_Favorite, token: tokenHolder)
+        .then((value) {
+      favoriteModel = FavoriteModel.fromJson(value.data);
+      //  debugPrint('getFavorites: ${value.data}');
+      emit(FavoriteGetSuccessState());
+    }).catchError((e) {
+      debugPrint('getFavorites: ${e.toString()}');
+      emit(FavoriteGetFailureState());
+    });
+  }
+
   FavoriteIConModel? favoriteIConModel;
+
   changeFavorite({required int productID}) {
     favorites[productID] = !favorites[productID]!;
-    emit(HomeFavoriteSwitchSuccessState());
+
+    emit(HomeFavoriteChangeLoadingState());
+
     DioHelper.postData(
       url: EndPoints.HOME_Favorite,
       data: {'product_id': productID},
-      token: tokenHolder, 
+      token: tokenHolder,
     ).then((value) {
       favoriteIConModel = FavoriteIConModel.fromJson(value.data);
       debugPrint('FavoriteIConModel : ${value.data}');
 
       if (!favoriteIConModel!.status!) {
         favorites[productID] = !favorites[productID]!;
+      } else {
+        getFavorites();
+        // emit(HomeFavoriteChangeSuccessState(favoriteIConModel: favoriteIConModel!));
       }
-      emit(HomeFavoriteSuccessState(favoriteIConModel: favoriteIConModel!));
+
+      emit(HomeFavoriteChangeSuccessState(
+          favoriteIConModel: favoriteIConModel!));
     }).catchError((e) {
       favorites[productID] = !favorites[productID]!;
-      emit(HomeFavoriteFailureState(errMessage: e.toString()));
+      emit(HomeFavoriteChangeFailureState(errMessage: e.toString()));
       debugPrint('FavoriteIConModel : ${e.toString()}');
     });
   }
 
-  // HomeCategoriesModel? homeCategoriesModel;
-  // getHomeCategories() {
-  //   emit(HomeCategoriesLoadingState());
-  //   if (homeCategoriesModel == null) {
-  //     DioHelper.getData(url: EndPoints.HOME_CATEGORIES).then((value) {
-  //       homeCategoriesModel = HomeCategoriesModel.fromJson(value.data);
-  //       debugPrint(homeCategoriesModel!.status.toString());
-  //       emit(HomeCategoriesSuccessState());
-  //     }).catchError((e) {
-  //       debugPrint('getHomeCategories: ${e.toString()}');
-  //       emit(HomeCategoriesFailureState(errMessage: e.toString()));
-  //     });
-  //   } else {
-  //     emit(HomeCategoriesSuccessState());
+  // removeFav(int id) {
+  //   if (favorites[id] == id) {
+  //     favorites.remove(favorites[id]);
   //   }
+  //   emit(HomeFavoriteDeletedSuccessState());
   // }
+
+  HomeCategoriesModel? homeCategoriesModel;
+  getHomeCategories() {
+    // emit(HomeCategoriesLoadingState());
+    if (homeCategoriesModel == null) {
+      DioHelper.getData(url: EndPoints.HOME_CATEGORIES).then((value) {
+        homeCategoriesModel = HomeCategoriesModel.fromJson(value.data);
+        debugPrint(homeCategoriesModel!.status.toString());
+        emit(HomeCategoriesSuccessState());
+      }).catchError((e) {
+        debugPrint('getHomeCategories: ${e.toString()}');
+        emit(HomeCategoriesFailureState(errMessage: e.toString()));
+      });
+    } else {
+      emit(HomeCategoriesSuccessState());
+    }
+  }
 }

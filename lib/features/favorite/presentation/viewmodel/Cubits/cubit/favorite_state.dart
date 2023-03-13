@@ -4,3 +4,8 @@ part of 'favorite_cubit.dart';
 abstract class FavoriteState {}
 
 class FavoriteInitial extends FavoriteState {}
+// class FavoriteLoadingState extends FavoriteState {}
+// class FavoriteSuccessState extends FavoriteState {}
+// class FavoriteFailureState extends FavoriteState {}
+
+// class FavoriteItemDeletedSuccessState extends FavoriteState {}
