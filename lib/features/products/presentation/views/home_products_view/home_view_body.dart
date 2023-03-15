@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
-import 'package:xstore_cubit/features/home/presentation/views/widgets/custom_carousel_widget.dart';
-import 'package:xstore_cubit/features/home/presentation/views/widgets/custom_homeCategories_Listview_widget.dart';
-import 'package:xstore_cubit/features/home/presentation/views/widgets/products_gridview_widget.dart';
 
-import '../../../categories/data/models/homeCategoriesModel.dart';
-import '../../data/models/home_model/home_model.dart';
+import '../../../../categories/data/models/homeCategoriesModel.dart';
+import '../../../data/models/home_model/home_model.dart';
+import 'widgets/custom_carousel_widget.dart';
+import 'widgets/custom_homeCategories_Listview_widget.dart';
+import 'widgets/products_gridview_widget.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({

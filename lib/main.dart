@@ -5,14 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xstore_cubit/core/app_managers/app_theme.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
-import 'package:xstore_cubit/features/favorite/presentation/viewmodel/Cubits/cubit/favorite_cubit.dart';
-import 'package:xstore_cubit/features/home/presentation/viewmodel/home/home_cubit.dart';
-import 'package:xstore_cubit/features/home/presentation/views/home_layout.dart';
-
 import 'core/constants.dart';
 import 'core/networks/local/cache_helper.dart';
 import 'features/categories/presentation/viewmodel/cubits/categories_Cubit/categories_cubit.dart';
 import 'features/onBoarding/presentation/views/onBoarding_view.dart';
+import 'features/products/presentation/viewmodel/home/home_cubit.dart';
+import 'features/products/presentation/views/home_products_view/home_layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +20,7 @@ void main() async {
   Widget? widget;
   bool? onBoarding = CacheHelper.getData(key: onBoardingKey);
   tokenHolder = CacheHelper.getData(key: tokenKey);
-  debugPrint('$onBoarding');
+  debugPrint('OnBoarding: $onBoarding');
 
   if (onBoarding != null) {
     if (tokenHolder != null) {
@@ -55,12 +53,12 @@ class MyApp extends StatelessWidget {
           BlocProvider<HomeCubit>(
             create: (context) => HomeCubit()
               ..getHomeData()
-              ..getHomeCategories()
-              ..getFavorites(),
+              // ..getHomeCategories()
+              // ..getFavorites(),
           ),
-          // BlocProvider<FavoriteCubit>(
-          //   create: (context) => FavoriteCubit(),
-          // ),
+          BlocProvider<CategoriesCubit>(
+            create: (context) => CategoriesCubit()..getHomeCategories(),
+          ),
         ],
         child: MaterialApp(
             // routerConfig: AppRouter.router,

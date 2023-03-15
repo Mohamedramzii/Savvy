@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
-import 'package:xstore_cubit/features/home/presentation/viewmodel/home/home_cubit.dart';
 
-import '../../../../../core/app_managers/assets_manager.dart';
-import '../../../data/models/home_model/home_model.dart';
+import '../../../../../../core/app_managers/assets_manager.dart';
+import '../../../../data/models/home_model/home_model.dart';
+import '../../../viewmodel/home/home_cubit.dart';
 
 class ProductsGridViewItemsWidget extends StatelessWidget {
   const ProductsGridViewItemsWidget({

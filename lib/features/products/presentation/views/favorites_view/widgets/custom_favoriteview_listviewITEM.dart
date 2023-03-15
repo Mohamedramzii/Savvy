@@ -3,23 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:xstore_cubit/core/constants.dart';
-
-import 'package:xstore_cubit/features/favorite/data/models/favoriteModel.dart';
-import 'package:xstore_cubit/features/favorite/presentation/viewmodel/Cubits/cubit/favorite_cubit.dart';
-import 'package:xstore_cubit/features/favorite/presentation/views/favoriteViewBody.dart';
-
-import '../../../../../core/app_managers/assets_manager.dart';
-import '../../../../home/presentation/viewmodel/home/home_cubit.dart';
+import '../../../../../../core/app_managers/assets_manager.dart';
+import '../../../../data/models/favorite_models/favoriteModel.dart';
+import '../../../viewmodel/home/home_cubit.dart';
 
 class CustomFavoritesListViewITEMWidget extends StatelessWidget {
-  CustomFavoritesListViewITEMWidget({
+  const CustomFavoritesListViewITEMWidget({
     Key? key,
     required this.favoriteModel,
   }) : super(key: key);
 
   final Datum favoriteModel;
-  FavoriteModel? favoriteModell;
+  // FavoriteModel? favoriteModell;
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +106,8 @@ class CustomFavoritesListViewITEMWidget extends StatelessWidget {
                             
                           },
                           icon: BlocProvider.of<HomeCubit>(context)
-                                      .favorites[favoriteModel.product!.id] ==
-                                  true
+                                      .favorites[favoriteModel.product!.id] ==true
+                                  
                               ? const Icon(
                                   Icons.favorite,
                                   color: Colors.red,

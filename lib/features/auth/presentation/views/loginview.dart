@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:xstore_cubit/core/app_managers/app_router.dart';
 import 'package:xstore_cubit/core/networks/local/cache_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/view_model/cubits/LOGIN_CUBIT/login_cubit.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/registerview.dart';
@@ -11,9 +9,9 @@ import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toa
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_button_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_haveaccount_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_textformfield_widget.dart';
-import 'package:xstore_cubit/features/home/presentation/views/home_layout.dart';
 
 import '../../../../core/constants.dart';
+import '../../../products/presentation/views/home_products_view/home_layout.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});

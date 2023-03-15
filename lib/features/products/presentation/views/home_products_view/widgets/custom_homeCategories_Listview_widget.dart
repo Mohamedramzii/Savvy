@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../categories/data/models/homeCategoriesModel.dart';
+import '../../../../../categories/data/models/homeCategoriesModel.dart';
 import 'custom_homeCategories_widget.dart';
 
 class CustomHomeCategoriesListViewWidget extends StatelessWidget {

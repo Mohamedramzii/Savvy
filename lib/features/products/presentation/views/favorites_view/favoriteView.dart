@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xstore_cubit/features/favorite/presentation/views/favoriteViewBody.dart';
-import 'package:xstore_cubit/features/home/presentation/viewmodel/home/home_cubit.dart';
+
+import '../../viewmodel/home/home_cubit.dart';
+import 'favoriteViewBody.dart';
 
 class FavoriteView extends StatelessWidget {
   const FavoriteView({super.key});
@@ -9,10 +10,11 @@ class FavoriteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<HomeCubit,HomeState>(
+      body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           var favCubit = BlocProvider.of<HomeCubit>(context);
           if (state is FavoriteGetSuccessState) {
+          // favCubit.getFavorites();
             return FavoriteViewBody(favoriteModel: favCubit.favoriteModel!);
           } else {
             return const Center(

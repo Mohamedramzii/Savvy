@@ -5,7 +5,7 @@ import 'package:xstore_cubit/core/app_managers/assets_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:xstore_cubit/features/home/data/models/home_model/home_model.dart';
+import '../../../../data/models/home_model/home_model.dart';
 
 class CustomCarouselSliderWidget extends StatelessWidget {
   const CustomCarouselSliderWidget({

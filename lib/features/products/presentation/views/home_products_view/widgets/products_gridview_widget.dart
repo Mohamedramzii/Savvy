@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:xstore_cubit/features/home/presentation/views/widgets/products_gridview_ITEM_widget.dart';
-
-import '../../../data/models/home_model/home_model.dart';
+import '../../../../data/models/home_model/home_model.dart';
+import 'products_gridview_ITEM_widget.dart';
 
 class ProductsGridViewWidget extends StatelessWidget {
   const ProductsGridViewWidget({

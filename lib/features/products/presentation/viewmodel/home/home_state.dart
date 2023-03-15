@@ -29,7 +29,7 @@ class HomeFailureState extends HomeState {
 //-----------------------------------------------------------------
 
 
-//Fav
+//Fav states in changeFavorite method
 
 class HomeFavoriteChangeLoadingState extends HomeState {}
 // class HomeFavoriteDeletedSuccessState extends HomeState {}
@@ -51,19 +51,19 @@ class HomeFavoriteChangeFailureState extends HomeState {
 //-----------------------------------------------------
 
 
-//CATEGORIES
-class HomeCategoriesSuccessState extends HomeState {}
+// //CATEGORIES
+// class HomeCategoriesSuccessState extends HomeState {}
 
-class HomeCategoriesFailureState extends HomeState {
-  final String errMessage;
-  HomeCategoriesFailureState({
-    required this.errMessage,
-  });
-}
+// class HomeCategoriesFailureState extends HomeState {
+//   final String errMessage;
+//   HomeCategoriesFailureState({
+//     required this.errMessage,
+//   });
+// }
 
 ///-------------------------------------------------
 
-//fav
+//fav states in getFavorites Method
 class FavoriteGetLoadingState extends HomeState {}
 
 class FavoriteGetSuccessState extends HomeState {}

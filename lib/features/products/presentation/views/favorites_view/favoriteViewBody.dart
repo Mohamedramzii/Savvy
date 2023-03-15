@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:xstore_cubit/features/favorite/data/models/favoriteModel.dart';
-
+import '../../../data/models/favorite_models/favoriteModel.dart';
 import 'widgets/custom_favoriteview_listviewITEM.dart';
 
 class FavoriteViewBody extends StatelessWidget {

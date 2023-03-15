@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:xstore_cubit/features/home/presentation/viewmodel/home/home_cubit.dart';
+
+import '../../viewmodel/home/home_cubit.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({super.key});
