@@ -20,5 +20,22 @@ class LoginFailureState extends LoginState {
     required this.errMessage,
   });
 }
+class RegisterLoadingState extends LoginState {}
+
+class RegisterSuccessState extends LoginState {
+  final LoginModel loginModel;
+  RegisterSuccessState({
+    required this.loginModel,
+  });
+}
+
+class RegisterFailureState extends LoginState {
+  final String errMessage;
+  RegisterFailureState({
+    required this.errMessage,
+  });
+}
 
 class LoginVisibilityIconState extends LoginState {}
+
+

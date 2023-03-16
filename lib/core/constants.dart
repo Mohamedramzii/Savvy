@@ -7,6 +7,8 @@ abstract class EndPoints {
   static const HOME = 'home';
   static const HOME_CATEGORIES = 'categories';
   static const HOME_Favorite = 'favorites';
+  static const PROFILE = 'profile';
+  static const REGISTER = 'register';
 }
 
 class Navigation {
@@ -28,3 +30,4 @@ class Navigation {
 const onBoardingKey = 'OnBoarding';
 const tokenKey = 'token';
 String? tokenHolder = '';
+bool? onBoarding;

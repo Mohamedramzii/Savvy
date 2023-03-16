@@ -12,7 +12,7 @@ class FavoriteViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return favoriteModel.data.data!.isEmpty
-        ? Center(child: Text('EMPTYYYYYYYYYYY',style: TextStyle(color: Colors.black),),)
+        ? Center(child: Text('Emptyyyyyyyyyyy',style: TextStyle(color: Colors.black),),)
         : Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.separated(

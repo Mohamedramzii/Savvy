@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:xstore_cubit/core/networks/local/cache_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/view_model/cubits/LOGIN_CUBIT/login_cubit.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/registerview.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toast_Widget.dart';
@@ -26,6 +25,7 @@ class LoginView extends StatelessWidget {
         create: (context) => LoginCubit(),
         child: BlocConsumer<LoginCubit, LoginState>(
           listener: (context, state) {
+            var loginCubit = LoginCubit.get(context);
             if (state is LoginSuccessState) {
               if (state.loginModel.status!) {
                 // Login is done
@@ -33,17 +33,18 @@ class LoginView extends StatelessWidget {
                     text: state.loginModel.message!, color: Colors.green);
 
                 // then we catch user token
-                CacheHelper.saveData(
-                    key: tokenKey, value: state.loginModel.userData!.token);
-                debugPrint(state.loginModel.userData!.token);
+                // CacheHelper.saveData(
+                //     key: tokenKey, value: state.loginModel.userData!.token);
+                // debugPrint('userToken: ${state.loginModel.userData!.token}');
 
                 // then we navigate to our home layout
                 Navigation.navigationWithoutReturn(context,
                     screen: const HomeLayout());
-              } else {
-                CustomToastWidget.getToast(
-                    text: state.loginModel.message!, color: Colors.red);
               }
+              //  else {
+              //   CustomToastWidget.getToast(
+              //       text: state.loginModel.message!, color: Colors.red);
+              // }
             }
           },
           builder: (context, state) {
@@ -68,7 +69,7 @@ class LoginView extends StatelessWidget {
                           SizedBox(
                             height: 10.h,
                           ),
-                          Text('Login now and enjoy our offers!',
+                          Text('Welcome Again!',
                               style: Theme.of(context).textTheme.displayMedium),
                           SizedBox(
                             height: 20.h,
@@ -156,7 +157,7 @@ class LoginView extends StatelessWidget {
                             toText: 'REGISTER',
                             onpressed: () {
                               Navigation.navigationWithReturn(context,
-                                  screen: const RegisterView());
+                                  screen:  RegisterView());
                             },
                           ),
                         ],

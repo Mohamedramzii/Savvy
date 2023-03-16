@@ -49,10 +49,10 @@ class HomeCubit extends Cubit<HomeState> {
       DioHelper.getData(url: EndPoints.HOME, token: tokenHolder).then((value) {
         homeModel = HomeModel.fromJson(value.data);
         debugPrint('getHomeData: ${homeModel!.status}');
-        // homeModel!.data!.products!.forEach((element) {
-        //   favorites.addAll({element.id!: element.inFavorites!});
-        // });
-        // debugPrint(favorites.toString());
+        homeModel!.data!.products!.forEach((element) {
+          favorites.addAll({element.id!: element.inFavorites!});
+        });
+        debugPrint(favorites.toString());
 
         emit(HomeSuccessState(homeModel: homeModel!));
       }).catchError((e) {
@@ -70,9 +70,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   getFavorites() {
     emit(FavoriteGetLoadingState());
-    homeModel!.data!.products!.forEach((element) {
-      favorites.addAll({element.id!: element.inFavorites!});
-    });
+    // homeModel!.data!.products!.forEach((element) {
+    //   favorites.addAll({element.id!: element.inFavorites!});
+    // });
 
     DioHelper.getData(url: EndPoints.HOME_Favorite, token: tokenHolder)
         .then((value) {
@@ -102,7 +102,8 @@ class HomeCubit extends Cubit<HomeState> {
 
       if (!favoriteIConModel!.status!) {
         favorites[productID] = !favorites[productID]!;
-      } else {
+      } else {  
+        print('fav got from here');
         getFavorites();
         // emit(HomeFavoriteChangeSuccessState(favoriteIConModel: favoriteIConModel!));
       }

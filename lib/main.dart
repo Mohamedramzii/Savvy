@@ -11,6 +11,7 @@ import 'features/categories/presentation/viewmodel/cubits/categories_Cubit/categ
 import 'features/onBoarding/presentation/views/onBoarding_view.dart';
 import 'features/products/presentation/viewmodel/home/home_cubit.dart';
 import 'features/products/presentation/views/home_products_view/home_layout.dart';
+import 'features/settings/presentation/viewmodel/cubit/settings_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,11 +19,12 @@ void main() async {
   await CacheHelper.init();
 
   Widget? widget;
-  bool? onBoarding = CacheHelper.getData(key: onBoardingKey);
+  bool? onBoarding = CacheHelper.getData(key: onBoardingKey) ?? false;
   tokenHolder = CacheHelper.getData(key: tokenKey);
   debugPrint('OnBoarding: $onBoarding');
+  debugPrint('token: $tokenHolder ');
 
-  if (onBoarding != null) {
+  if (onBoarding==true) {
     if (tokenHolder != null) {
       widget = const HomeLayout();
     } else {
@@ -58,6 +60,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<CategoriesCubit>(
             create: (context) => CategoriesCubit()..getHomeCategories(),
+          ),
+          BlocProvider<SettingsCubit>(
+            create: (context) => SettingsCubit()..getUserData(),
           ),
         ],
         child: MaterialApp(

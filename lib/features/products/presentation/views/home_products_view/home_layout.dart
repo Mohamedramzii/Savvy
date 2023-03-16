@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xstore_cubit/core/constants.dart';
+import 'package:xstore_cubit/core/networks/local/cache_helper.dart';
+import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
 
 import '../../viewmodel/home/home_cubit.dart';
 
@@ -18,7 +21,11 @@ class HomeLayout extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.search, size: 30))
+                  onPressed: () {
+                    CacheHelper.clearData(key: tokenKey);
+                    print('Token is cleared!!');
+                    Navigation.navigationWithoutReturn(context, screen: LoginView());
+                  }, icon: const Icon(Icons.search, size: 30))
             ],
           ),
           body: homeCubit.screens[homeCubit.currentIndex],

@@ -35,9 +35,9 @@ class Datum {
 
 class Product {
   int? id;
-  int? price;
-  int? oldPrice;
-  int? discount;
+  num? price;
+  num? oldPrice;
+  num? discount;
   String? image;
   String? name;
   String? description;
