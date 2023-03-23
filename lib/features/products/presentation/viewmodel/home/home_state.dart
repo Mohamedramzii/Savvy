@@ -5,7 +5,6 @@ abstract class HomeState {}
 
 class HomeInitial extends HomeState {}
 
-
 //HOME
 
 class HomeLayoutchangeState extends HomeState {}
@@ -28,7 +27,6 @@ class HomeFailureState extends HomeState {
 
 //-----------------------------------------------------------------
 
-
 //Fav states in changeFavorite method
 
 class HomeFavoriteChangeLoadingState extends HomeState {}
@@ -49,7 +47,6 @@ class HomeFavoriteChangeFailureState extends HomeState {
 }
 
 //-----------------------------------------------------
-
 
 // //CATEGORIES
 // class HomeCategoriesSuccessState extends HomeState {}

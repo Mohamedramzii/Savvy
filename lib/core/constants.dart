@@ -10,6 +10,7 @@ abstract class EndPoints {
   static const PROFILE = 'profile';
   static const REGISTER = 'register';
   static const UPDATE_PROFILE = 'update-profile';
+  static const SEARCH = 'products/search';
 }
 
 class Navigation {

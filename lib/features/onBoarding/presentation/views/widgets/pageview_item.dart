@@ -18,14 +18,13 @@ class OnBoardingPageViewItemWidget extends StatelessWidget {
         Expanded(
           child: Image.asset(
             data.image,
-           
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: Text(
             data.title,
-            style:TextStyle(fontSize: 35.sp),
+            style: TextStyle(fontSize: 35.sp),
           ),
         ),
         Padding(

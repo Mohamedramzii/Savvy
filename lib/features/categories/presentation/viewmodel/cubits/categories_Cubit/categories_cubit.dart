@@ -5,7 +5,6 @@ import '../../../../../../core/constants.dart';
 import '../../../../../../core/networks/remote/dio_helper.dart';
 import '../../../../data/models/homeCategoriesModel.dart';
 
-
 part 'categories_state.dart';
 
 class CategoriesCubit extends Cubit<CategoriesState> {
@@ -16,7 +15,8 @@ class CategoriesCubit extends Cubit<CategoriesState> {
     if (homeCategoriesModel == null) {
       DioHelper.getData(url: EndPoints.HOME_CATEGORIES).then((value) {
         homeCategoriesModel = HomeCategoriesModel.fromJson(value.data);
-        debugPrint('getHomeCategories ${homeCategoriesModel!.status.toString()}');
+        debugPrint(
+            'getHomeCategories ${homeCategoriesModel!.status.toString()}');
         emit(HomeCategoriesSuccessState());
       }).catchError((e) {
         debugPrint('getHomeCategories: ${e.toString()}');

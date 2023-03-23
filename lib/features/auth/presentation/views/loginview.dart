@@ -157,7 +157,7 @@ class LoginView extends StatelessWidget {
                             toText: 'REGISTER',
                             onpressed: () {
                               Navigation.navigationWithReturn(context,
-                                  screen:  RegisterView());
+                                  screen: RegisterView());
                             },
                           ),
                         ],

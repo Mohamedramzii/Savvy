@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:xstore_cubit/features/search/data/models/search_model/search_model.dart';
 import '../../../../../../core/app_managers/assets_manager.dart';
 import '../../../../data/models/favorite_models/favoriteModel.dart';
 import '../../../viewmodel/home/home_cubit.dart';
 
 class CustomFavoritesListViewITEMWidget extends StatelessWidget {
-  const CustomFavoritesListViewITEMWidget({
+   CustomFavoritesListViewITEMWidget({
     Key? key,
     required this.favoriteModel,
+    // this.searchModel
   }) : super(key: key);
 
   final Datum favoriteModel;
-  // FavoriteModel? favoriteModell;
+  // SearchModel? searchModel;
 
   @override
   Widget build(BuildContext context) {
@@ -98,23 +100,20 @@ class CustomFavoritesListViewITEMWidget extends StatelessWidget {
                         ),
                       const Spacer(),
                       IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                           
-                            BlocProvider.of<HomeCubit>(context).changeFavorite(
-                                productID: favoriteModel.product!.id!);
-                            
-                          },
-                          icon: BlocProvider.of<HomeCubit>(context)
-                                      .favorites[favoriteModel.product!.id] ==true
-                                  
-                              ? const Icon(
-                                  Icons.favorite,
-                                  color: Colors.red,
-                                )
-                              : const Icon(Icons.favorite_border),
-                        ),
-                      
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          BlocProvider.of<HomeCubit>(context).changeFavorite(
+                              productID: favoriteModel.product!.id!);
+                        },
+                        icon: BlocProvider.of<HomeCubit>(context)
+                                    .favorites[favoriteModel.product!.id] ==
+                                true
+                            ? const Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              )
+                            : const Icon(Icons.favorite_border),
+                      ),
                     ],
                   ),
                 ],

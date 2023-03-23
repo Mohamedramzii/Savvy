@@ -21,8 +21,7 @@ class CustomHomeCategoriesListViewWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return CustomHomeCategoriesItem(
-                homeCategoriesModel:
-                    homeCategoriesModel.data.data[index],
+                homeCategoriesModel: homeCategoriesModel.data.data[index],
               );
             },
             separatorBuilder: (context, index) => SizedBox(

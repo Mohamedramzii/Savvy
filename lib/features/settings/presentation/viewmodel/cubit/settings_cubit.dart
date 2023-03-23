@@ -42,13 +42,13 @@ class SettingsCubit extends Cubit<SettingsState> {
   }) {
     emit(USerDataUpdateLoadingState());
 
-    DioHelper.putData(url: EndPoints.UPDATE_PROFILE,token: tokenHolder, data: {
+    DioHelper.putData(url: EndPoints.UPDATE_PROFILE, token: tokenHolder, data: {
       'email': email,
       'name': name,
       'phone': phone,
     }).then((value) {
       userModel = LoginModel.fromJson(value.data);
-      debugPrint('UpdateUserData: ${userModel!.userData!.name } ');
+      debugPrint('UpdateUserData: ${userModel!.userData!.name} ');
       emit(USerDataUpdateSuccessState());
     }).catchError((e) {
       debugPrint('UpdateUserData Error: ${e.toString()}');

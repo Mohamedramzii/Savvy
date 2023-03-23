@@ -42,10 +42,12 @@ class ProfileView extends StatelessWidget {
                         height: 60.h,
                       ),
                       if (state is USerDataUpdateLoadingState)
-                         LinearProgressIndicator(color: ColorsManager.kprimaryColor,),
+                        LinearProgressIndicator(
+                          color: ColorsManager.kprimaryColor,
+                        ),
                       CustomImageWidget(
-                          data:
-                              BlocProvider.of<SettingsCubit>(context).userModel!,
+                          data: BlocProvider.of<SettingsCubit>(context)
+                              .userModel!,
                           width: 140.w,
                           height: 140.h),
                       SizedBox(
@@ -131,44 +133,43 @@ class ProfileView extends StatelessWidget {
 
   MaterialButton _mainWidget_body(SettingsCubit cubit) {
     return MaterialButton(
-                        minWidth: double.infinity,
-                        height: 40.h,
-                        onPressed: () {
-                          cubit.updating();
-                        },
-                        color: ColorsManager.kprimaryColor,
-                        child: Text(
-                          // cubit.isUpdating && !_formkey.currentState!.validate()? 'Save' :
-                          'Update',
-                          style:
-                              TextStyle(fontSize: 18.sp, color: Colors.white),
-                        ),
-                      );
+      minWidth: double.infinity,
+      height: 40.h,
+      onPressed: () {
+        cubit.updating();
+      },
+      color: ColorsManager.kprimaryColor,
+      child: Text(
+        // cubit.isUpdating && !_formkey.currentState!.validate()? 'Save' :
+        'Update',
+        style: TextStyle(fontSize: 18.sp, color: Colors.white),
+      ),
+    );
   }
 
   MaterialButton _replacement_body(SettingsCubit cubit) {
     return MaterialButton(
-                      minWidth: double.infinity,
-                      height: 40.h,
-                      onPressed: () {
-                        cubit.updating();
-                        if (!cubit.isUpdating) {
-                          if (_formkey.currentState!.validate()) {
-                            _formkey.currentState!.save();
-                            cubit.updateUserData(
-                              name: namecontroller.text,
-                              email: emailcontroller.text,
-                              phone: phonecontroller.text,
-                            );
-                          }
-                        }
-                      },
-                      color: ColorsManager.kprimaryColor,
-                      child: Text(
-                        // cubit.isUpdating && !_formkey.currentState!.validate()? 'Save' :
-                         'Save',
-                        style: TextStyle(fontSize: 18.sp, color: Colors.white),
-                      ),
-                    );
+      minWidth: double.infinity,
+      height: 40.h,
+      onPressed: () {
+        cubit.updating();
+        if (!cubit.isUpdating) {
+          if (_formkey.currentState!.validate()) {
+            _formkey.currentState!.save();
+            cubit.updateUserData(
+              name: namecontroller.text,
+              email: emailcontroller.text,
+              phone: phonecontroller.text,
+            );
+          }
+        }
+      },
+      color: ColorsManager.kprimaryColor,
+      child: Text(
+        // cubit.isUpdating && !_formkey.currentState!.validate()? 'Save' :
+        'Save',
+        style: TextStyle(fontSize: 18.sp, color: Colors.white),
+      ),
+    );
   }
 }

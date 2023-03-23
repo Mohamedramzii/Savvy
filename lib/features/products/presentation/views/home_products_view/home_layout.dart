@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xstore_cubit/core/constants.dart';
 import 'package:xstore_cubit/core/networks/local/cache_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
+import 'package:xstore_cubit/features/search/presentation/views/searchView.dart';
 
 import '../../viewmodel/home/home_cubit.dart';
 
@@ -22,7 +23,11 @@ class HomeLayout extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.search, size: 30))
+                  onPressed: () {
+                    Navigation.navigationWithReturn(context,
+                        screen:  SearchView());
+                  },
+                  icon: const Icon(Icons.search, size: 30))
             ],
           ),
           body: homeCubit.screens[homeCubit.currentIndex],

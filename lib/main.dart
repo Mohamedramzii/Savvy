@@ -24,7 +24,7 @@ void main() async {
   debugPrint('OnBoarding: $onBoarding');
   debugPrint('token: $tokenHolder ');
 
-  if (onBoarding==true) {
+  if (onBoarding == true) {
     if (tokenHolder != null) {
       widget = const HomeLayout();
     } else {
@@ -54,11 +54,10 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MultiBlocProvider(
         providers: [
           BlocProvider<HomeCubit>(
-            create: (context) => HomeCubit()
-              ..getHomeData() 
+              create: (context) => HomeCubit()..getHomeData()
               // ..getHomeCategories()
               // ..getFavorites(),
-          ),
+              ),
           BlocProvider<CategoriesCubit>(
             create: (context) => CategoriesCubit()..getHomeCategories(),
           ),
@@ -73,13 +72,7 @@ class MyApp extends StatelessWidget {
             theme: APPTHEMES.lightMode,
             darkTheme: APPTHEMES.darkMode,
             themeMode: ThemeMode.light,
-            home: startWidget
-
-            // isOnboarding != null && isOnboarding == true
-            //     ? LoginView()
-            //     : const OnBoardingView()
-
-            ),
+            home: startWidget),
       ),
     );
   }

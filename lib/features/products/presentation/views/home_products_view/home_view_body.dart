@@ -38,7 +38,8 @@ class HomeViewBody extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                     color: ColorsManager.kprimaryColor)),
           ),
-           CustomHomeCategoriesListViewWidget(homeCategoriesModel:homeCategoriesModel),
+          CustomHomeCategoriesListViewWidget(
+              homeCategoriesModel: homeCategoriesModel),
           SizedBox(
             height: 10.h,
           ),

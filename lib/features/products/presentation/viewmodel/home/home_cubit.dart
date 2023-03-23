@@ -26,22 +26,22 @@ class HomeCubit extends Cubit<HomeState> {
     const HomeView(),
     const CartView(),
     const FavoriteView(),
-     SettingsView(),
+    SettingsView(),
   ];
 
-  void PageViewChange({required int index,context}) async {
+  void PageViewChange({required int index, context}) async {
     currentIndex = index;
     emit(HomeLayoutchangeState());
 
     if (currentIndex == 2) {
-     if(favoriteModel ==null){
+      if (favoriteModel == null) {
         await getFavorites();
-     }else{
-       emit(FavoriteGetSuccessState());
-     }
-    if(currentIndex == 3){
-      await BlocProvider.of<SettingsCubit>(context).getUserData() ;
-    }
+      } else {
+        emit(FavoriteGetSuccessState());
+      }
+      if (currentIndex == 3) {
+        await BlocProvider.of<SettingsCubit>(context).getUserData();
+      }
     }
   }
 
@@ -63,8 +63,8 @@ class HomeCubit extends Cubit<HomeState> {
         emit(HomeSuccessState(homeModel: homeModel!));
       }).catchError((e) {
         debugPrint('getHomeData Error: ${e.toString()}');
-        
-        emit(HomeFailureState(errMessage: e.toString() ));
+
+        emit(HomeFailureState(errMessage: e.toString()));
       });
     } else {
       emit(HomeSuccessState(homeModel: homeModel!));
@@ -109,7 +109,7 @@ class HomeCubit extends Cubit<HomeState> {
 
       if (!favoriteIConModel!.status!) {
         favorites[productID] = !favorites[productID]!;
-      } else {  
+      } else {
         print('fav got from here');
         getFavorites();
         // emit(HomeFavoriteChangeSuccessState(favoriteIConModel: favoriteIConModel!));

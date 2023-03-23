@@ -22,7 +22,10 @@ class SettingsUserDataFailure extends SettingsState {
   });
 }
 
-class IsUpdatingState extends SettingsState{}
-class USerDataUpdateSuccessState extends SettingsState{}
-class USerDataUpdateFailureState extends SettingsState{}
-class USerDataUpdateLoadingState extends SettingsState{}
+class IsUpdatingState extends SettingsState {}
+
+class USerDataUpdateSuccessState extends SettingsState {}
+
+class USerDataUpdateFailureState extends SettingsState {}
+
+class USerDataUpdateLoadingState extends SettingsState {}

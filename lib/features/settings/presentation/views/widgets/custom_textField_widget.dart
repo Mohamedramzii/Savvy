@@ -7,16 +7,15 @@ class CustomTextFieldWIdget extends StatelessWidget {
     Key? key,
     required this.text,
     required this.prefixICon,
-   
     required this.controller,
     required this.onsubmitted,
   }) : super(key: key);
   final String text;
   final Icon prefixICon;
-  
+
   final TextEditingController controller;
   // ignore: non_constant_identifier_names
-  final FormFieldSetter <String> onsubmitted;
+  final FormFieldSetter<String> onsubmitted;
   @override
   Widget build(BuildContext context) {
     return TextField(

@@ -12,15 +12,19 @@ class FavoriteViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return favoriteModel.data.data!.isEmpty
-        ? Center(child: Text('Emptyyyyyyyyyyy',style: TextStyle(color: Colors.black),),)
+        ? Center(
+            child: Text(
+              'Emptyyyyyyyyyyy',
+              style: TextStyle(color: Colors.black),
+            ),
+          )
         : Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemCount: favoriteModel.data.data!.length,
               itemBuilder: (context, index) {
-                return 
-                CustomFavoritesListViewITEMWidget(
+                return CustomFavoritesListViewITEMWidget(
                     favoriteModel: favoriteModel.data.data![index]);
               },
               separatorBuilder: (BuildContext context, int index) {

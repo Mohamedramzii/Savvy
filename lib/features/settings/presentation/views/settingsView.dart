@@ -88,8 +88,8 @@ class SettingsView extends StatelessWidget {
                         SizedBox(
                           height: 10.h,
                         ),
-                      const CustomAccountSettingsWidget(),
-                      const CustomDarkModeWidget(),
+                        const CustomAccountSettingsWidget(),
+                        const CustomDarkModeWidget(),
                         SizedBox(
                           height: 20.h,
                         ),
@@ -114,6 +114,3 @@ class SettingsView extends StatelessWidget {
     );
   }
 }
-
-
-

@@ -20,6 +20,7 @@ class LoginFailureState extends LoginState {
     required this.errMessage,
   });
 }
+
 class RegisterLoadingState extends LoginState {}
 
 class RegisterSuccessState extends LoginState {
@@ -37,5 +38,3 @@ class RegisterFailureState extends LoginState {
 }
 
 class LoginVisibilityIconState extends LoginState {}
-
-

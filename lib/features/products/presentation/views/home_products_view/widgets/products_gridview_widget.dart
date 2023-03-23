@@ -18,11 +18,11 @@ class ProductsGridViewWidget extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: 10.h,
       crossAxisSpacing: 5.w,
-      childAspectRatio: 1/1.7,
+      childAspectRatio: 1 / 1.7,
       children: List.generate(
           homeModel.data!.products!.length,
-          (index) => ProductsGridViewItemsWidget(
-              homeModel: homeModel, index: index)),
+          (index) =>
+              ProductsGridViewItemsWidget(homeModel: homeModel, index: index)),
     );
   }
 }

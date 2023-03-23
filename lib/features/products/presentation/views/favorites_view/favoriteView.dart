@@ -14,7 +14,7 @@ class FavoriteView extends StatelessWidget {
         builder: (context, state) {
           var favCubit = BlocProvider.of<HomeCubit>(context);
           if (state is FavoriteGetSuccessState) {
-          // favCubit.getFavorites();
+            // favCubit.getFavorites();
             return FavoriteViewBody(favoriteModel: favCubit.favoriteModel!);
           } else {
             return const Center(
