@@ -8,7 +8,12 @@ class SettingsInitial extends SettingsState {}
 //User
 class SettingsUserDataLoading extends SettingsState {}
 
-class SettingsUserDataSuccess extends SettingsState {}
+class SettingsUserDataSuccess extends SettingsState {
+  final LoginModel userData;
+  SettingsUserDataSuccess({
+    required this.userData,
+  });
+}
 
 class SettingsUserDataFailure extends SettingsState {
   final String errMessage;
@@ -16,3 +21,8 @@ class SettingsUserDataFailure extends SettingsState {
     required this.errMessage,
   });
 }
+
+class IsUpdatingState extends SettingsState{}
+class USerDataUpdateSuccessState extends SettingsState{}
+class USerDataUpdateFailureState extends SettingsState{}
+class USerDataUpdateLoadingState extends SettingsState{}

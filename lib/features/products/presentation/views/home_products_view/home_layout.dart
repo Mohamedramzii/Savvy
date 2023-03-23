@@ -17,22 +17,19 @@ class HomeLayout extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text(
-             'Savvy',style: TextStyle(fontWeight: FontWeight.w900,fontSize: 30),
+              'Savvy',
+              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 30),
             ),
             actions: [
               IconButton(
-                  onPressed: () {
-                    CacheHelper.clearData(key: tokenKey);
-                    print('Token is cleared!!');
-                    Navigation.navigationWithoutReturn(context, screen: LoginView());
-                  }, icon: const Icon(Icons.search, size: 30))
+                  onPressed: () {}, icon: const Icon(Icons.search, size: 30))
             ],
           ),
           body: homeCubit.screens[homeCubit.currentIndex],
           bottomNavigationBar: BottomNavigationBar(
               currentIndex: homeCubit.currentIndex,
               onTap: (index) {
-                homeCubit.PageViewChange(index: index);
+                homeCubit.PageViewChange(index: index, context: context);
               },
               items: const [
                 BottomNavigationBarItem(

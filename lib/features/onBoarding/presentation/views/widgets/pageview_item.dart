@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:xstore_cubit/features/onBoarding/data/models/onBoarding_model.dart';
 
@@ -15,21 +16,23 @@ class OnBoardingPageViewItemWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-            child: Image.asset(
-          data.image,
-        )),
+          child: Image.asset(
+            data.image,
+           
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: Text(
             data.title,
-            style: Theme.of(context).textTheme.displayLarge,
+            style:TextStyle(fontSize: 35.sp),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: Text(
             data.body,
-            style: Theme.of(context).textTheme.displayMedium,
+            style: TextStyle(fontSize: 25.sp),
           ),
         )
       ],

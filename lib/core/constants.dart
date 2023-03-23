@@ -9,6 +9,7 @@ abstract class EndPoints {
   static const HOME_Favorite = 'favorites';
   static const PROFILE = 'profile';
   static const REGISTER = 'register';
+  static const UPDATE_PROFILE = 'update-profile';
 }
 
 class Navigation {

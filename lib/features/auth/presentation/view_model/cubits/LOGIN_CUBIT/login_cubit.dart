@@ -39,7 +39,7 @@ class LoginCubit extends Cubit<LoginState> {
     ).then((value) {
       loginModel = LoginModel.fromJson(value.data);
       debugPrint(loginModel!.message);
-      // CacheHelper.saveData(key: tokenKey, value: loginModel!.userData!.token);
+      CacheHelper.saveData(key: tokenKey, value: loginModel!.userData!.token);
       tokenHolder = loginModel!.userData!.token;
       debugPrint('userToken: ${loginModel!.userData!.token}');
       emit(LoginSuccessState(loginModel: loginModel!));
@@ -70,7 +70,7 @@ class LoginCubit extends Cubit<LoginState> {
     ).then((value) {
       loginModel = LoginModel.fromJson(value.data);
       debugPrint(loginModel!.message);
-      // CacheHelper.saveData(key: tokenKey, value: loginModel!.userData!.token);
+      CacheHelper.saveData(key: tokenKey, value: loginModel!.userData!.token);
       tokenHolder = loginModel!.userData!.token;
       debugPrint('userToken: ${loginModel!.userData!.token}');
       emit(RegisterSuccessState(loginModel: loginModel!));

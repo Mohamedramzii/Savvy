@@ -4,12 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
 
 class CustomTextFormFieldWidget extends StatelessWidget {
-  const CustomTextFormFieldWidget({
+  CustomTextFormFieldWidget({
     Key? key,
     required this.controller,
     required this.keyboardtype,
     required this.labeltext,
+    this.initialtext,
     required this.isPassword,
+    this.isEnabled = true,
+    this.isFilled = false,
+    this.fontsize = 15,
+    this.textColor = Colors.grey,
+    this.fillColor = Colors.white,
     required this.validate,
     required this.onsave,
     required this.prefixicon,
@@ -20,7 +26,13 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType keyboardtype;
   final String labeltext;
+  final String? initialtext;
   final bool isPassword;
+  bool isEnabled;
+  bool isFilled;
+  final double fontsize;
+  final Color textColor;
+  final Color fillColor;
   final FormFieldValidator<String> validate;
   final FormFieldSetter<String> onsave;
   final Widget prefixicon;
@@ -30,14 +42,20 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: const TextStyle(color: Colors.black),
+      style:  TextStyle(color: Colors.black,fontSize: 20.sp),
       textInputAction: textInputAction,
       keyboardType: keyboardtype,
+      initialValue: initialtext,
       validator: validate,
       onSaved: onsave,
       onFieldSubmitted: onsubmitted,
       obscureText: isPassword,
       decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        filled: isFilled,
+        fillColor: fillColor,
+        // hintText: controller.text,
+        enabled: isEnabled,
         prefixIcon: prefixicon,
         prefixIconColor: ColorsManager.kprimaryColor,
         suffixIcon: sufixicon,
@@ -45,8 +63,9 @@ class CustomTextFormFieldWidget extends StatelessWidget {
         // hintText: 'username',
         label: Text(
           labeltext,
-          style: TextStyle(fontSize: 15.sp, color: Colors.grey),
+          style: TextStyle(fontSize: fontsize.sp, color: textColor),
         ),
+        disabledBorder: InputBorder.none,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(color: Colors.black),

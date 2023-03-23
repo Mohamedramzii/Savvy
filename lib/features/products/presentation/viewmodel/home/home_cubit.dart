@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xstore_cubit/core/constants.dart';
+import 'package:xstore_cubit/core/errors/failures.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
+import 'package:xstore_cubit/features/settings/presentation/viewmodel/cubit/settings_cubit.dart';
 import '../../../../cart/presentation/views/cartView.dart';
 import '../../../../categories/data/models/homeCategoriesModel.dart';
 import '../../../data/models/favorite_models/favoriteIconModel.dart';
@@ -23,10 +26,10 @@ class HomeCubit extends Cubit<HomeState> {
     const HomeView(),
     const CartView(),
     const FavoriteView(),
-    const SettingsView(),
+     SettingsView(),
   ];
 
-  void PageViewChange({required int index}) async {
+  void PageViewChange({required int index,context}) async {
     currentIndex = index;
     emit(HomeLayoutchangeState());
 
@@ -36,6 +39,9 @@ class HomeCubit extends Cubit<HomeState> {
      }else{
        emit(FavoriteGetSuccessState());
      }
+    if(currentIndex == 3){
+      await BlocProvider.of<SettingsCubit>(context).getUserData() ;
+    }
     }
   }
 
@@ -57,7 +63,8 @@ class HomeCubit extends Cubit<HomeState> {
         emit(HomeSuccessState(homeModel: homeModel!));
       }).catchError((e) {
         debugPrint('getHomeData Error: ${e.toString()}');
-        emit(HomeFailureState(errMessage: e.toString()));
+        
+        emit(HomeFailureState(errMessage: e.toString() ));
       });
     } else {
       emit(HomeSuccessState(homeModel: homeModel!));
