@@ -1,16 +1,11 @@
-# xstore_cubit
+# Savvy
 
-A new Flutter project.
+## An online shop app includes clothes section, electronic devices section, ...etc.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### User can do:
+#### - log in, register and change his password.
+#### - add products to his favorites and cart.
+#### - change his profile data.
+#### - change light mode to dark mode and vice versa.
+#### - log out.
+#### - change language (in progress)
