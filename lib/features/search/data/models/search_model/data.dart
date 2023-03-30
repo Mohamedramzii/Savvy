@@ -45,5 +45,4 @@ class Data {
         to: json['to'] as int?,
         total: json['total'] as int?,
       );
-
 }

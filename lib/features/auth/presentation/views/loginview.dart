@@ -40,6 +40,7 @@ class LoginView extends StatelessWidget {
                 // then we navigate to our home layout
                 Navigation.navigationWithoutReturn(context,
                     screen: const HomeLayout());
+                // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeLayout(),));
               }
               //  else {
               //   CustomToastWidget.getToast(

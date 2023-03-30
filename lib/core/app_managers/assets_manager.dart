@@ -5,7 +5,5 @@ abstract class ImagesManager {
   static String imageLoading = 'assets/images/image-loading.png';
   static String imageLoading2 = 'assets/images/image-loading.json';
   static String imageLoading3 = 'assets/images/loading3.png';
-  // static String imageLoading20 = 'assets/images/loading-20.png';
-  // static String imageLoading50 = 'assets/images/image-50.png';
-  // static String imageLoading100 = 'assets/images/image-100.png';
+  static String cart = 'assets/images/cart.png';
 }

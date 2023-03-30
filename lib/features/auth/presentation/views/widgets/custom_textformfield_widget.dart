@@ -42,7 +42,10 @@ class CustomTextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(color: Colors.black, fontSize: 20.sp),
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 20.sp,
+      ),
       textInputAction: textInputAction,
       keyboardType: keyboardtype,
       initialValue: initialtext,

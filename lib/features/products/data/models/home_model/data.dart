@@ -18,9 +18,4 @@ class Data {
             ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
             .toList(),
       );
-
-  Map<String, dynamic> toJson() => {
-        'banners': banners?.map((e) => e.toJson()).toList(),
-        'products': products?.map((e) => e.toJson()).toList(),
-      };
 }

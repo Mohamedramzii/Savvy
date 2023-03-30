@@ -67,13 +67,21 @@ class SearchView extends StatelessWidget {
                           controller.text != ''),
                       replacement: Column(
                         children: [
-                         SizedBox(height: 200.h,),
-                          Center(
-                            child: Text(
-                              //! add an png or lottie
-                              'Emptyyyyyyyyyy',
-                              style: TextStyle(fontSize: 50.sp),
-                            ),
+                          SizedBox(
+                            height: 120.h,
+                          ),
+                          Icon(
+                            Icons.search_rounded,
+                            size: 50,
+                            color: ColorsManager.kprimaryColor,
+                          ),
+                          Text(
+                            //! add an png or lottie
+                            'What do you want to purchase \ntoday!?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                color: ColorsManager.kprimaryColor),
                           ),
                         ],
                       ),

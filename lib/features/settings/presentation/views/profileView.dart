@@ -30,95 +30,111 @@ class ProfileView extends StatelessWidget {
           body: Conditional.single(
             context: context,
             conditionBuilder: (context) => cubit.userModel != null,
-            widgetBuilder: (context) => Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Form(
-                key: _formkey,
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 60.h,
+            widgetBuilder: (context) => Center(
+              child: Card(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(200),
+                    topRight: Radius.circular(200),
+                    bottomRight: Radius.circular(25),
+                    bottomLeft: Radius.circular(25),
+                  ),
+                ),
+                shadowColor: ColorsManager.kprimaryColor,
+                elevation: 10,
+                margin: const EdgeInsets.all(20.0),
+                child: Form(
+                  key: _formkey,
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 20.h),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          if (state is USerDataUpdateLoadingState)
+                            LinearProgressIndicator(
+                              color: ColorsManager.kprimaryColor,
+                            ),
+                          CustomImageWidget(
+                              data: BlocProvider.of<SettingsCubit>(context)
+                                  .userModel!,
+                              width: 140.w,
+                              height: 140.h),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          CustomTextFormFieldWidget(
+                              controller: namecontroller,
+                              keyboardtype: TextInputType.name,
+                              labeltext: 'Username',
+                              initialtext: namecontroller.text,
+                              isPassword: false,
+                              isEnabled: cubit.isUpdating,
+                              validate: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a valid username';
+                                }
+                                return null;
+                              },
+                              onsave: (newValue) {
+                                namecontroller.text = newValue!;
+                              },
+                              prefixicon: const Icon(Icons.person)),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          CustomTextFormFieldWidget(
+                              controller: emailcontroller,
+                              keyboardtype: TextInputType.emailAddress,
+                              labeltext: 'email address',
+                              initialtext: emailcontroller.text,
+                              isPassword: false,
+                              isEnabled: cubit.isUpdating,
+                              validate: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a valid email address';
+                                }
+                                return null;
+                              },
+                              onsave: (newValue) {
+                                emailcontroller.text = newValue!.trim();
+                              },
+                              prefixicon: const Icon(Icons.email)),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          CustomTextFormFieldWidget(
+                              controller: phonecontroller,
+                              keyboardtype: TextInputType.name,
+                              labeltext: 'Phone Number',
+                              initialtext: phonecontroller.text,
+                              isPassword: false,
+                              isEnabled: cubit.isUpdating,
+                              validate: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a valid phone number';
+                                }
+                                return null;
+                              },
+                              onsave: (newValue) {
+                                phonecontroller.text = newValue!.trim();
+                              },
+                              prefixicon: const Icon(Icons.phone_android)),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          Visibility(
+                            visible: !cubit.isUpdating,
+                            replacement: _replacement_body(cubit),
+                            child: _mainWidget_body(cubit),
+                          ),
+                        ],
                       ),
-                      if (state is USerDataUpdateLoadingState)
-                        LinearProgressIndicator(
-                          color: ColorsManager.kprimaryColor,
-                        ),
-                      CustomImageWidget(
-                          data: BlocProvider.of<SettingsCubit>(context)
-                              .userModel!,
-                          width: 140.w,
-                          height: 140.h),
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      CustomTextFormFieldWidget(
-                          controller: namecontroller,
-                          keyboardtype: TextInputType.name,
-                          labeltext: 'Username',
-                          initialtext: namecontroller.text,
-                          isPassword: false,
-                          isEnabled: cubit.isUpdating,
-                          validate: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a valid username';
-                            }
-                            return null;
-                          },
-                          onsave: (newValue) {
-                            namecontroller.text = newValue!;
-                          },
-                          prefixicon: const Icon(Icons.person)),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      CustomTextFormFieldWidget(
-                          controller: emailcontroller,
-                          keyboardtype: TextInputType.emailAddress,
-                          labeltext: 'email address',
-                          initialtext: emailcontroller.text,
-                          isPassword: false,
-                          isEnabled: cubit.isUpdating,
-                          validate: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a valid email address';
-                            }
-                            return null;
-                          },
-                          onsave: (newValue) {
-                            emailcontroller.text = newValue!.trim();
-                          },
-                          prefixicon: const Icon(Icons.email)),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      CustomTextFormFieldWidget(
-                          controller: phonecontroller,
-                          keyboardtype: TextInputType.name,
-                          labeltext: 'Phone Number',
-                          initialtext: phonecontroller.text,
-                          isPassword: false,
-                          isEnabled: cubit.isUpdating,
-                          validate: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a valid phone number';
-                            }
-                            return null;
-                          },
-                          onsave: (newValue) {
-                            phonecontroller.text = newValue!.trim();
-                          },
-                          prefixicon: const Icon(Icons.phone_android)),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Visibility(
-                        visible: !cubit.isUpdating,
-                        replacement: _replacement_body(cubit),
-                        child: _mainWidget_body(cubit),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -131,8 +147,9 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  MaterialButton _mainWidget_body(SettingsCubit cubit) {
+  Widget _mainWidget_body(SettingsCubit cubit) {
     return MaterialButton(
+      shape: const StadiumBorder(),
       minWidth: double.infinity,
       height: 40.h,
       onPressed: () {
@@ -147,29 +164,50 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  MaterialButton _replacement_body(SettingsCubit cubit) {
-    return MaterialButton(
-      minWidth: double.infinity,
-      height: 40.h,
-      onPressed: () {
-        cubit.updating();
-        if (!cubit.isUpdating) {
-          if (_formkey.currentState!.validate()) {
-            _formkey.currentState!.save();
-            cubit.updateUserData(
-              name: namecontroller.text,
-              email: emailcontroller.text,
-              phone: phonecontroller.text,
-            );
-          }
-        }
-      },
-      color: ColorsManager.kprimaryColor,
-      child: Text(
-        // cubit.isUpdating && !_formkey.currentState!.validate()? 'Save' :
-        'Save',
-        style: TextStyle(fontSize: 18.sp, color: Colors.white),
-      ),
+  Widget _replacement_body(SettingsCubit cubit) {
+    return Column(
+      children: [
+        MaterialButton(
+          shape: const StadiumBorder(),
+          minWidth: double.infinity,
+          height: 40.h,
+          onPressed: () {
+            cubit.updating();
+            if (!cubit.isUpdating) {
+              if (_formkey.currentState!.validate()) {
+                _formkey.currentState!.save();
+                cubit.updateUserData(
+                  name: namecontroller.text,
+                  email: emailcontroller.text,
+                  phone: phonecontroller.text,
+                );
+              }
+            }
+          },
+          color: ColorsManager.kprimaryColor,
+          child: Text(
+            // cubit.isUpdating && !_formkey.currentState!.validate()? 'Save' :
+            'Save',
+            style: TextStyle(fontSize: 18.sp, color: Colors.white),
+          ),
+        ),
+        SizedBox(
+          height: 5.h,
+        ),
+        MaterialButton(
+          shape: const StadiumBorder(),
+          minWidth: double.infinity,
+          height: 40.h,
+          onPressed: () {
+            cubit.updating();
+          },
+          color: Colors.grey,
+          child: Text(
+            'Cancel',
+            style: TextStyle(fontSize: 18.sp, color: Colors.white),
+          ),
+        ),
+      ],
     );
   }
 }

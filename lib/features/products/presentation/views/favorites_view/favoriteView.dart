@@ -13,9 +13,9 @@ class FavoriteView extends StatelessWidget {
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           var favCubit = BlocProvider.of<HomeCubit>(context);
-          if (state is FavoriteGetSuccessState) {
-            // favCubit.getFavorites();
-            return FavoriteViewBody(favoriteModel: favCubit.favoriteModel!);
+          if (state is GetFav2SuccessState) {
+            // return FavoriteViewBody(favoriteModel: favCubit.favoriteModel!);
+            return FavoriteViewBody(fav: favCubit.favorites2);
           } else {
             return const Center(
               child: CircularProgressIndicator(),
@@ -23,19 +23,6 @@ class FavoriteView extends StatelessWidget {
           }
         },
       ),
-      // Conditional.single(
-      //   context: context,
-      //   // conditionBuilder: (context) => favCubit.favoriteModel != null,
-      //   conditionBuilder: (context) =>
-      //       state is! HomeFavoriteChangeLoadingState,
-      //   widgetBuilder: (context) =>
-      //       FavoriteViewBody(favoriteModel: favCubit.favoriteModel!),
-      //   fallbackBuilder: (context) {
-      //     return const Center(
-      //       child: CircularProgressIndicator(),
-      //     );
-      //   },
-      // ),
     );
   }
 }

@@ -9,7 +9,7 @@ class CustomToastWidget {
     Fluttertoast.showToast(
         msg: text,
         backgroundColor: color,
-        toastLength: Toast.LENGTH_LONG,
+        toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM);
   }
 }

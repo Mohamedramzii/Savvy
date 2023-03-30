@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xstore_cubit/core/app_managers/app_theme.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
+import 'package:xstore_cubit/features/cart/presentation/viewmodel/Cart_Cubit/cart_cubit.dart';
 import 'core/constants.dart';
 import 'core/networks/local/cache_helper.dart';
+import 'core/networks/network_checker.dart';
 import 'features/categories/presentation/viewmodel/cubits/categories_Cubit/categories_cubit.dart';
 import 'features/onBoarding/presentation/views/onBoarding_view.dart';
 import 'features/products/presentation/viewmodel/home/home_cubit.dart';
@@ -17,6 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
+  // var res=await CheckInternet();
 
   Widget? widget;
   bool? onBoarding = CacheHelper.getData(key: onBoardingKey) ?? false;
@@ -35,6 +38,7 @@ void main() async {
   }
 
   runApp(MyApp(
+    // startWidget: res ? widget: const Scaffold(body: Center(child: Text('No Intenet'),),),
     startWidget: widget,
   ));
 }
@@ -54,7 +58,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MultiBlocProvider(
         providers: [
           BlocProvider<HomeCubit>(
-              create: (context) => HomeCubit()..getHomeData()
+              create: (context) => HomeCubit()
+                ..getHomeData()
+                ..getFavorites2()
               // ..getHomeCategories()
               // ..getFavorites(),
               ),
@@ -63,6 +69,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<SettingsCubit>(
             create: (context) => SettingsCubit()..getUserData(),
+          ),
+          BlocProvider<CartCubit>(
+            create: (context) => CartCubit()..getCart(),
           ),
         ],
         child: MaterialApp(

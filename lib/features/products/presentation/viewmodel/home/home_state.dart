@@ -68,3 +68,27 @@ class FavoriteGetSuccessState extends HomeState {}
 class FavoriteGetFailureState extends HomeState {}
 
 // class FavoriteItemDeletedSuccessState extends HomeState {}
+
+//details states
+
+class DetailsLoadingState extends HomeState {}
+
+class DetailsSuccessState extends HomeState {}
+
+class DetailsFailureState extends HomeState {}
+
+//add to favorites
+class DelToFavLoadingState extends HomeState {}
+
+class DelToFavSuccessState extends HomeState {}
+
+class DelToFavFailureState extends HomeState {}
+
+// getFav2
+class GetFav2SuccessState extends HomeState {}
+
+class GetFav2FailureState extends HomeState {}
+
+class AddOrDeleteFavoritesSuccessState extends HomeState {}
+
+class AddOrDeleteFavoritesFailureState extends HomeState {}

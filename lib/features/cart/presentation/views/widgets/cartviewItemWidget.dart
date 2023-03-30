@@ -1,25 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import '../../../../../core/app_managers/assets_manager.dart';
+import '../../../data/models/cart_model/cart_item.dart';
 
-import 'package:xstore_cubit/features/search/data/models/search_model/search_model.dart';
-
-import '../../../../../../core/app_managers/assets_manager.dart';
-import '../../../../data/models/favorite_models/favoriteModel.dart';
-import '../../../viewmodel/home/home_cubit.dart';
-
-class CustomFavoritesListViewITEMWidget extends StatelessWidget {
-  CustomFavoritesListViewITEMWidget({
+class CartViewItemWidget extends StatelessWidget {
+  const CartViewItemWidget({
     Key? key,
-    // this.searchModel
-    required this.fav,
+    required this.item,
   }) : super(key: key);
 
-  // final Datum favoriteModel;
-  final Product fav;
-  // SearchModel? searchModel;
+  final CartItem item;
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +24,14 @@ class CustomFavoritesListViewITEMWidget extends StatelessWidget {
           Stack(
             children: [
               CachedNetworkImage(
-                imageUrl: fav.image!,
+                imageUrl: item.product!.image!,
                 width: 140.w,
                 height: 130.h,
                 fit: BoxFit.fill,
                 placeholder: (context, url) =>
                     Lottie.asset(ImagesManager.imageLoading2),
               ),
-              if (fav.discount != 0)
+              if (item.product!.discount != 0)
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
@@ -65,8 +57,9 @@ class CustomFavoritesListViewITEMWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(height: 20.h,),
                   Text(
-                    fav.name!,
+                    item.product!.name!,
                     style: Theme.of(context)
                         .textTheme
                         .displaySmall!
@@ -75,13 +68,13 @@ class CustomFavoritesListViewITEMWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(
-                    height: 10.h,
+                    height: 20.h,
                   ),
-                  const Spacer(),
+                  // const Spacer(),
                   Row(
                     children: [
                       Text(
-                        'EGP ${fav.price!.round().toString()}',
+                        'EGP ${item.product!.price!.round().toString()}',
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall!
@@ -90,9 +83,9 @@ class CustomFavoritesListViewITEMWidget extends StatelessWidget {
                       SizedBox(
                         width: 3.w,
                       ),
-                      if (fav.discount != 0)
+                      if (item.product!.discount != 0)
                         Text(
-                          'EGP ${fav.oldPrice!.round().toString()}',
+                          'EGP ${item.product!.oldPrice!.round().toString()}',
                           style: Theme.of(context)
                               .textTheme
                               .displaySmall!
@@ -102,37 +95,7 @@ class CustomFavoritesListViewITEMWidget extends StatelessWidget {
                                   fontSize: 13),
                         ),
                       const Spacer(),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          BlocProvider.of<HomeCubit>(context)
-                              .addOrRemoveFavorites(
-                                  productID: fav.id.toString());
-                        },
-                        icon: BlocProvider.of<HomeCubit>(context)
-                                .favoritesID
-                                .contains(fav.id.toString())
-                            ? const Icon(
-                                Icons.favorite,
-                                color: Colors.red,
-                              )
-                            : const Icon(Icons.favorite_border),
-                      ),
-                      // IconButton(
-                      //   padding: EdgeInsets.zero,
-                      //   onPressed: () {
-                      //     BlocProvider.of<HomeCubit>(context).changeFavorite(
-                      //         productID: fav.id!);
-                      //   },
-                      //   icon: BlocProvider.of<HomeCubit>(context)
-                      //               .favorites[fav.id] ==
-                      //           true
-                      //       ? const Icon(
-                      //           Icons.favorite,
-                      //           color: Colors.red,
-                      //         )
-                      //       : const Icon(Icons.favorite_border),
-                      // ),
+                      
                     ],
                   ),
                 ],

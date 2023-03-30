@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xstore_cubit/core/constants.dart';
 import 'package:xstore_cubit/core/errors/failures.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
+import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toast_Widget.dart';
+import 'package:xstore_cubit/features/cart/presentation/viewmodel/Cart_Cubit/cart_cubit.dart';
+import 'package:xstore_cubit/features/products/data/models/details_models/details_model.dart';
 import 'package:xstore_cubit/features/settings/presentation/viewmodel/cubit/settings_cubit.dart';
 import '../../../../cart/presentation/views/cartView.dart';
 import '../../../../categories/data/models/homeCategoriesModel.dart';
@@ -26,24 +31,8 @@ class HomeCubit extends Cubit<HomeState> {
     const HomeView(),
     const CartView(),
     const FavoriteView(),
-    SettingsView(),
+    const SettingsView(),
   ];
-
-  void PageViewChange({required int index, context}) async {
-    currentIndex = index;
-    emit(HomeLayoutchangeState());
-
-    if (currentIndex == 2) {
-      if (favoriteModel == null) {
-        await getFavorites();
-      } else {
-        emit(FavoriteGetSuccessState());
-      }
-      if (currentIndex == 3) {
-        await BlocProvider.of<SettingsCubit>(context).getUserData();
-      }
-    }
-  }
 
   HomeModel? homeModel;
   Map<int, bool> favorites = {};
@@ -124,27 +113,66 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  // removeFav(int id) {
-  //   if (favorites[id] == id) {
-  //     favorites.remove(favorites[id]);
-  //   }
-  //   emit(HomeFavoriteDeletedSuccessState());
-  // }
+  Set<String> favoritesID = {};
+  List<Product> favorites2 = [];
+  getFavorites2() {
+    favorites2.clear();
+    DioHelper.getData(url: EndPoints.HOME_Favorite, token: tokenHolder)
+        .then((value) {
+      if (value.data['status'] == true) {
+        for (var item in value.data['data']['data']) {
+          favorites2.add(Product.fromJson(item['product']));
+          favoritesID.add(item['product']['id'].toString());
+        }
+        debugPrint('Fav2 length: ${favorites2.length}');
+        emit(GetFav2SuccessState());
+      }
+    }).catchError((e) {
+      debugPrint('fav2 Error: ${e.toString()}');
+      emit(GetFav2FailureState());
+    });
+  }
 
-  // HomeCategoriesModel? homeCategoriesModel;
-  // getHomeCategories() {
-  //   // emit(HomeCategoriesLoadingState());
-  //   if (homeCategoriesModel == null) {
-  //     DioHelper.getData(url: EndPoints.HOME_CATEGORIES).then((value) {
-  //       homeCategoriesModel = HomeCategoriesModel.fromJson(value.data);
-  //       debugPrint(homeCategoriesModel!.status.toString());
-  //       emit(HomeCategoriesSuccessState());
-  //     }).catchError((e) {
-  //       debugPrint('getHomeCategories: ${e.toString()}');
-  //       emit(HomeCategoriesFailureState(errMessage: e.toString()));
-  //     });
-  //   } else {
-  //     emit(HomeCategoriesSuccessState());
-  //   }
-  // }
-}
+  addOrRemoveFavorites({required String productID}) {
+    // getFavorites2();
+    DioHelper.postData(
+            url: EndPoints.HOME_Favorite,
+            data: {'product_id': productID},
+            token: tokenHolder)
+        .then((value) {
+      if (value.data['status'] == true) {
+        if (favoritesID.contains(productID)) {
+          favoritesID.remove(productID);
+          CustomToastWidget.getToast(
+              text: 'Removed From Favorites', color: Colors.red);
+        } else {
+          favoritesID.add(productID);
+          CustomToastWidget.getToast(
+              text: 'Added To Favorites', color: Colors.green);
+        }
+      }
+
+      getFavorites2();
+      emit(AddOrDeleteFavoritesSuccessState());
+    }).catchError((e) {
+      emit(AddOrDeleteFavoritesFailureState());
+    });
+  }
+
+  void PageViewChange({required int index, context}) async {
+    currentIndex = index;
+    emit(HomeLayoutchangeState());
+
+    if (currentIndex == 2) {
+      if (favorites2.isEmpty) {
+        await getFavorites2();
+      } else {
+        emit(GetFav2SuccessState());
+      }
+      // if (currentIndex == 1) {
+      //      BlocProvider.of<CartCubit>(context).getCart();
+      //   }
+      }
+    }
+  }
+
