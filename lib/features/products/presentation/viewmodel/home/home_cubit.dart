@@ -134,7 +134,6 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   addOrRemoveFavorites({required String productID}) {
-    // getFavorites2();
     DioHelper.postData(
             url: EndPoints.HOME_Favorite,
             data: {'product_id': productID},
@@ -172,7 +171,6 @@ class HomeCubit extends Cubit<HomeState> {
       // if (currentIndex == 1) {
       //      BlocProvider.of<CartCubit>(context).getCart();
       //   }
-      }
     }
   }
-
+}

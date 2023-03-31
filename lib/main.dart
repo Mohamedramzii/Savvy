@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,9 +7,10 @@ import 'package:xstore_cubit/core/app_managers/app_theme.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
 import 'package:xstore_cubit/features/cart/presentation/viewmodel/Cart_Cubit/cart_cubit.dart';
+
 import 'core/constants.dart';
 import 'core/networks/local/cache_helper.dart';
-import 'core/networks/network_checker.dart';
+import 'core/networks/network_checker/internet_connection_checker_stream.dart';
 import 'features/categories/presentation/viewmodel/cubits/categories_Cubit/categories_cubit.dart';
 import 'features/onBoarding/presentation/views/onBoarding_view.dart';
 import 'features/products/presentation/viewmodel/home/home_cubit.dart';
@@ -60,10 +62,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<HomeCubit>(
               create: (context) => HomeCubit()
                 ..getHomeData()
-                ..getFavorites2()
-              // ..getHomeCategories()
-              // ..getFavorites(),
-              ),
+                ..getFavorites2()),
           BlocProvider<CategoriesCubit>(
             create: (context) => CategoriesCubit()..getHomeCategories(),
           ),
@@ -81,7 +80,11 @@ class MyApp extends StatelessWidget {
             theme: APPTHEMES.lightMode,
             darkTheme: APPTHEMES.darkMode,
             themeMode: ThemeMode.light,
-            home: startWidget),
+            home: InternetConnectionCheckerStream(
+              widget: startWidget!,
+            )
+            // startWidget
+            ),
       ),
     );
   }
