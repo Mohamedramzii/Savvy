@@ -7,7 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_textformfield_widget.dart';
 import 'package:xstore_cubit/features/settings/presentation/viewmodel/cubit/settings_cubit.dart';
+import 'package:xstore_cubit/features/settings/presentation/views/change_password_view.dart';
+import 'package:xstore_cubit/features/settings/presentation/views/settingsView.dart';
 import 'package:xstore_cubit/features/settings/presentation/views/widgets/custom_image_widget.dart';
+
+import '../../../../core/constants.dart';
 
 class ProfileView extends StatelessWidget {
   ProfileView({super.key});
@@ -52,20 +56,45 @@ class ProfileView extends StatelessWidget {
                           horizontal: 12.w, vertical: 20.h),
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: 20.h,
-                          ),
                           if (state is USerDataUpdateLoadingState)
-                            LinearProgressIndicator(
-                              color: ColorsManager.kprimaryColor,
+                            SizedBox(
+                              width: 170.w,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Colors.grey.shade200,
+                                color: ColorsManager.kprimaryColor,
+                              ),
+                            ),
+                          if (state is! USerDataUpdateLoadingState)
+                            IconButton(
+                              onPressed: () => Navigator.pop(context),
+                              icon: const Icon(Icons.arrow_back),
+                              padding: EdgeInsets.zero,
                             ),
                           CustomImageWidget(
                               data: BlocProvider.of<SettingsCubit>(context)
                                   .userModel!,
                               width: 140.w,
                               height: 140.h),
+                          Align(
+                              alignment: Alignment.centerRight,
+                              child: TextButton.icon(
+                                  onPressed: () {
+                                    Navigation.navigationWithReturn(context,
+                                        screen: ChangePasswordView());
+                                  },
+                                  icon: Icon(
+                                    Icons.lock_open,
+                                    color: ColorsManager.kprimaryColor,
+                                  ),
+                                  label: Text(
+                                    'Change Your Password',
+                                    style: TextStyle(
+                                        color: ColorsManager.kprimaryColor,
+                                        fontSize: 15.sp,
+                                        decoration: TextDecoration.underline),
+                                  ))),
                           SizedBox(
-                            height: 30.h,
+                            height: 10.h,
                           ),
                           CustomTextFormFieldWidget(
                               controller: namecontroller,
@@ -90,7 +119,7 @@ class ProfileView extends StatelessWidget {
                           CustomTextFormFieldWidget(
                               controller: emailcontroller,
                               keyboardtype: TextInputType.emailAddress,
-                              labeltext: 'email address',
+                              labeltext: 'Email Address',
                               initialtext: emailcontroller.text,
                               isPassword: false,
                               isEnabled: cubit.isUpdating,

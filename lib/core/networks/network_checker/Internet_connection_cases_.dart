@@ -27,7 +27,7 @@ class InternetConnectionCases extends StatelessWidget {
         }
 
       default:
-        return const NoInternetConnectWIdget();
+        return widget;
     }
   }
 }

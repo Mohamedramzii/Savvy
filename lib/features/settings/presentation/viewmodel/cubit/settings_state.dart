@@ -29,3 +29,15 @@ class USerDataUpdateSuccessState extends SettingsState {}
 class USerDataUpdateFailureState extends SettingsState {}
 
 class USerDataUpdateLoadingState extends SettingsState {}
+
+
+class LogoutSuccessState extends SettingsState {}
+
+
+
+class ChangePasswordSuccessState extends SettingsState {}
+
+class ChangePasswordLoadingState extends SettingsState {}
+
+class ChangePasswordFailureState extends SettingsState {}
+class ChangePasswordVisibilityIconState extends SettingsState{}

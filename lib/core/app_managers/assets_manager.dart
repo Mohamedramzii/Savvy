@@ -6,4 +6,7 @@ abstract class ImagesManager {
   static String imageLoading2 = 'assets/images/image-loading.json';
   static String imageLoading3 = 'assets/images/loading3.png';
   static String cart = 'assets/images/cart.png';
+  static String emptycart = 'assets/images/empty_cart.png';
+  static String forgotpassword = 'assets/images/Forgot_password.png';
+  static String emptyfavorites = 'assets/images/empty_favorites.png';
 }

@@ -5,6 +5,8 @@ import 'package:xstore_cubit/core/constants.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
 import 'package:xstore_cubit/features/auth/data/models/login_model.dart';
 
+import '../../../../../core/networks/local/cache_helper.dart';
+
 part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
@@ -54,5 +56,51 @@ class SettingsCubit extends Cubit<SettingsState> {
       debugPrint('UpdateUserData Error: ${e.toString()}');
       emit(USerDataUpdateFailureState());
     });
+  }
+
+  logout() {
+    DioHelper.postData(url: EndPoints.LOGOUT, data: {}, token: tokenHolder);
+    CacheHelper.clearData(key: tokenKey);
+    debugPrint('Token is cleared!!');
+    debugPrint('Logout');
+
+    emit(LogoutSuccessState());
+  }
+
+
+  
+  String? message;
+  bool? status;
+  changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required context
+  }) {
+    emit(ChangePasswordLoadingState());
+    DioHelper.postData(
+        url: EndPoints.CHANGEPASSWORD,
+        token: tokenHolder,
+        data: {
+          'current_password': currentPassword,
+          'new_password': newPassword
+        }).then((value) {
+      status = value.data['status'];
+      message = value.data['message'];
+      debugPrint('change password: $message');
+      Navigator.pop(context);
+      emit(ChangePasswordSuccessState());
+    }).catchError((e) {
+      debugPrint('change password Error: ${e.toString}');
+      emit(ChangePasswordFailureState());
+    });
+  }
+
+
+  bool isHidden2 = true;
+  visibilityChange2() {
+    isHidden2 = !isHidden2;
+   
+    debugPrint('isHidden2 ? $isHidden2');
+    emit(ChangePasswordVisibilityIconState());
   }
 }

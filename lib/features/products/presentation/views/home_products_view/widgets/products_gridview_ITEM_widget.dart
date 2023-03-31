@@ -36,15 +36,19 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
             Stack(
               children: [
                 Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: Hero(
+                    tag: homeModel.data!.products![index].id.toString(),
                     child: CachedNetworkImage(
-                      imageUrl: homeModel.data!.products![index].image!,
-                      width: double.infinity,
-                      height: 180.h,
-                      fit: BoxFit.fill,
-                      placeholder: (context, url) =>
-                          Lottie.asset(ImagesManager.imageLoading2),
-                    )),
+                        imageUrl: homeModel.data!.products![index].image!,
+                        width: double.infinity,
+                        height: 180.h,
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) =>
+                            Lottie.asset(ImagesManager.imageLoading2),
+                      ),
+                  ),
+                ),
                 if (homeModel.data!.products![index].discount != 0)
                   Align(
                     alignment: Alignment.topLeft,

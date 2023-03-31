@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:xstore_cubit/features/auth/presentation/view_model/cubits/LOGIN_CUBIT/login_cubit.dart';
+import 'package:xstore_cubit/core/app_managers/color_manager.dart';
+import 'package:xstore_cubit/features/settings/presentation/views/change_password_view.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/registerview.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toast_Widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_button_widget.dart';
@@ -11,6 +12,8 @@ import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_tex
 
 import '../../../../core/constants.dart';
 import '../../../products/presentation/views/home_products_view/home_layout.dart';
+import '../view_model/cubits/Auth_CUBIT/auth_cubit.dart';
+import '../view_model/cubits/Auth_CUBIT/auth_state.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});
@@ -22,20 +25,20 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => LoginCubit(),
-        child: BlocConsumer<LoginCubit, LoginState>(
+        create: (context) => AuthCubit(),
+        child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
-            var loginCubit = LoginCubit.get(context);
+            var authCubit = AuthCubit.get(context);
             if (state is LoginSuccessState) {
               if (state.loginModel.status!) {
-                // Login is done
+                // login is done
                 CustomToastWidget.getToast(
                     text: state.loginModel.message!, color: Colors.green);
 
                 // then we catch user token
                 // CacheHelper.saveData(
-                //     key: tokenKey, value: state.loginModel.userData!.token);
-                // debugPrint('userToken: ${state.loginModel.userData!.token}');
+                //     key: tokenKey, value: state.authModel.userData!.token);
+                // debugPrint('userToken: ${state.authModel.userData!.token}');
 
                 // then we navigate to our home layout
                 Navigation.navigationWithoutReturn(context,
@@ -44,7 +47,7 @@ class LoginView extends StatelessWidget {
               }
               //  else {
               //   CustomToastWidget.getToast(
-              //       text: state.loginModel.message!, color: Colors.red);
+              //       text: state.authModel.message!, color: Colors.red);
               // }
             }
           },
@@ -108,13 +111,13 @@ class LoginView extends StatelessWidget {
                             onsave: (String? newValue) {
                               passwordcontroller.text = newValue!;
                             },
-                            isPassword: LoginCubit.get(context).isHidden,
+                            isPassword: AuthCubit.get(context).isHidden,
                             prefixicon: const Icon(Icons.lock),
                             sufixicon: IconButton(
                               onPressed: () {
-                                LoginCubit.get(context).visibilityChange();
+                                AuthCubit.get(context).visibilityChange();
                               },
-                              icon: Icon(LoginCubit.get(context).isHidden
+                              icon: Icon(AuthCubit.get(context).isHidden
                                   ? Icons.visibility
                                   : Icons.visibility_off),
                             ),
@@ -122,15 +125,13 @@ class LoginView extends StatelessWidget {
                             onsubmitted: (value) {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                LoginCubit.get(context).loginUser(
+                                AuthCubit.get(context).loginUser(
                                     email: emailcontroller.text.trim(),
                                     password: passwordcontroller.text.trim());
                               }
                             },
                           ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
+                         
                           Conditional.single(
                             context: context,
                             conditionBuilder: (context) =>
@@ -140,7 +141,7 @@ class LoginView extends StatelessWidget {
                               onpressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
-                                  LoginCubit.get(context).loginUser(
+                                  AuthCubit.get(context).loginUser(
                                       email: emailcontroller.text.trim(),
                                       password: passwordcontroller.text.trim());
                                 }

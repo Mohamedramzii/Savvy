@@ -233,16 +233,18 @@ class DetailsView extends StatelessWidget {
           SizedBox(
             width: 5.w,
           ),
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-                // color: Colors.amber,
-                borderRadius: BorderRadius.circular(20)),
-            child: CachedNetworkImage(
-              imageUrl: model.data!.products![index].image!,
-              placeholder: (context, url) =>
-                  Image.asset(ImagesManager.imageLoading2),
+          Hero(
+            tag:  model.data!.products![index].id.toString(),
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                  // color: Colors.amber,
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                      image: CachedNetworkImageProvider(
+                    model.data!.products![index].image!,
+                  ))),
             ),
           ),
         ],
