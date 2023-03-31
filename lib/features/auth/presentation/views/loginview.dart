@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
 import 'package:xstore_cubit/features/settings/presentation/views/change_password_view.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/registerview.dart';
@@ -131,7 +132,9 @@ class LoginView extends StatelessWidget {
                               }
                             },
                           ),
-                         
+                          SizedBox(
+                            height: 20.h,
+                          ),
                           Conditional.single(
                             context: context,
                             conditionBuilder: (context) =>
@@ -147,8 +150,9 @@ class LoginView extends StatelessWidget {
                                 }
                               },
                             ),
-                            fallbackBuilder: (context) => const Center(
-                              child: CircularProgressIndicator(),
+                            fallbackBuilder: (context) =>  Center(
+                              child: LoadingAnimationWidget.staggeredDotsWave(
+                                  color: ColorsManager.kprimaryColor, size: 50),
                             ),
                           ),
                           SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_button_widget.dart';
 import 'package:xstore_cubit/features/cart/presentation/viewmodel/Cart_Cubit/cart_cubit.dart';
@@ -107,7 +108,7 @@ class CartView extends StatelessWidget {
                                 //   height: 20.h,
                                 // )
                                 Padding(
-                                  padding:   const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: CustomButtonWidget(
                                       color: Colors.black,
                                       text: 'Check out',
@@ -122,9 +123,9 @@ class CartView extends StatelessWidget {
                       )
                     : Center(child: Image.asset(ImagesManager.emptycart))
                 : Center(
-                    child: CircularProgressIndicator(
-                    color: ColorsManager.kprimaryColor,
-                  )),
+                    child: LoadingAnimationWidget.staggeredDotsWave(
+                        color: ColorsManager.kprimaryColor, size: 50),
+                  ),
           );
         },
       ),

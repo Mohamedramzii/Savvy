@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xstore_cubit/features/products/presentation/viewmodel/home/home_cubit.dart';
 import 'package:xstore_cubit/features/settings/presentation/viewmodel/cubit/settings_cubit.dart';
 
 import '../../../../../core/app_managers/color_manager.dart';
@@ -46,6 +47,7 @@ class LogOutWidget extends StatelessWidget {
                           BlocProvider.of<SettingsCubit>(context).logout();
                           Navigation.navigationWithoutReturn(context,
                               screen: LoginView());
+                          BlocProvider.of<HomeCubit>(context).currentIndex=0;
                         },
                         child: Text('Yes',
                             style:

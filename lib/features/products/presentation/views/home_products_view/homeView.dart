@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toast_Widget.dart';
 
@@ -39,9 +40,8 @@ class HomeView extends StatelessWidget {
           },
           fallbackBuilder: (context) {
             return Center(
-              child: CircularProgressIndicator(
-                color: ColorsManager.kprimaryColor,
-              ),
+              child: LoadingAnimationWidget.staggeredDotsWave(
+                  color: ColorsManager.kprimaryColor, size: 50),
             );
           },
         );

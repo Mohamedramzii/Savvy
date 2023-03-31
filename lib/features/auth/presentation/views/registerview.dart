@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toast_Widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_button_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_haveaccount_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_textformfield_widget.dart';
 
+import '../../../../core/app_managers/color_manager.dart';
 import '../../../../core/constants.dart';
 import '../../../products/presentation/views/home_products_view/home_layout.dart';
 import '../view_model/cubits/Auth_CUBIT/auth_cubit.dart';
@@ -192,8 +194,9 @@ class RegisterView extends StatelessWidget {
                                 }
                               },
                             ),
-                            fallbackBuilder: (context) => const Center(
-                              child: CircularProgressIndicator(),
+                            fallbackBuilder: (context) => Center(
+                              child: LoadingAnimationWidget.staggeredDotsWave(
+                                  color: ColorsManager.kprimaryColor, size: 50),
                             ),
                           ),
                           SizedBox(
