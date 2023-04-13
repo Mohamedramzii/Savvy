@@ -15,9 +15,9 @@ class FavoriteView extends StatelessWidget {
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           var favCubit = BlocProvider.of<HomeCubit>(context);
-          if (state is GetFav2SuccessState) {
-            // return FavoriteViewBody(favoriteModel: favCubit.favoriteModel!);
-            return FavoriteViewBody(fav: favCubit.favorites2);
+          if (state is FavoriteGetSuccessState) {
+            return FavoriteViewBody(favoriteModel: favCubit.favoriteModel!);
+            // return FavoriteViewBody(fav: favCubit.favorites2);
           } else {
             return Center(
               child: LoadingAnimationWidget.staggeredDotsWave(

@@ -1,9 +1,22 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 class DioHelper {
-  static Dio? dio;
+  static Dio dio=Dio();
 
   static init() {
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        if (await _isConnected()) {
+          handler.next(options);
+        } else {
+          handler.reject(DioError(
+              error: 'No internet connection available.',
+              requestOptions: options));
+        }
+      },
+    ));
     dio = Dio(BaseOptions(
         baseUrl: 'https://student.valuxapps.com/api/',
         headers: {
@@ -11,6 +24,11 @@ class DioHelper {
           // 'lang': 'en',
         },
         receiveDataWhenStatusError: true));
+  }
+
+  static Future<bool> _isConnected() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
   }
 
   static Future<Response> getData({

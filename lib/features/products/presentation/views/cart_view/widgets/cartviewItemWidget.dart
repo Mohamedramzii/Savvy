@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../../core/app_managers/assets_manager.dart';
-import '../../../data/models/cart_model/cart_item.dart';
+
+import '../../../../../../core/app_managers/assets_manager.dart';
+import '../../../../../cart/data/models/cart_model/cart_item.dart';
+
 
 class CartViewItemWidget extends StatelessWidget {
   const CartViewItemWidget({

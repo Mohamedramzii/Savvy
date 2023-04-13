@@ -9,4 +9,6 @@ abstract class ImagesManager {
   static String emptycart = 'assets/images/empty_cart.png';
   static String forgotpassword = 'assets/images/Forgot_password.png';
   static String emptyfavorites = 'assets/images/empty_favorites.png';
+  static String shoppingcartIcon = 'assets/images/shopping-cart.png';
+  static String emptycartIcon = 'assets/images/empty-cart.png';
 }

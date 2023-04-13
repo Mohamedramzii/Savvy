@@ -1,26 +1,35 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'dart:async';
 
-import '../networks/local/cache_helper.dart';
+import 'package:bloc/bloc.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
+
 
 part 'app_state.dart';
 
+// enum ConnectivityStatus { connected, disconnected }
 class AppCubit extends Cubit<AppState> {
-  AppCubit() : super(AppInitial());
+  AppCubit() : super(AppInternetConnectionNone()){
+    _subscription = _connectivity.onConnectivityChanged.listen(_onConnectivityChange);
+  }
 
-  // bool isOnBoarding = false;
-  // void modeChange({bool? fromshared}) {
-  //   if (fromshared != null) {
-  //     isOnBoarding = fromshared;
-  //     emit(IsOnBoardingOrLoginState());
-  //     print('1. $isOnBoarding');
-  //   } else {
-  //     isOnBoarding =!isOnBoarding;
-  //     CacheHelper.saveData(key: 'OnBoarding', value: isOnBoarding)
-  //         .then((value) {
-  //           emit(IsOnBoardingOrLoginState());
-  //           print('2. $isOnBoarding');
-  //         });
-  //   }
-  // }
+
+  final Connectivity _connectivity = Connectivity();
+  StreamSubscription<ConnectivityResult>? _subscription;
+
+
+  void _onConnectivityChange(ConnectivityResult result) async {
+    if (result == ConnectivityResult.none) {
+      emit(AppInternetConnectionNone());
+    } else {
+      emit(AppInternetConnectionConnected());
+    }
+  }
+
+  @override
+  Future<void> close() {
+    _subscription?.cancel();
+    return super.close();
+  }
+
 }

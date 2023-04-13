@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xstore_cubit/core/app_managers/assets_manager.dart';
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
 import 'package:xstore_cubit/core/constants.dart';
@@ -12,7 +14,10 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        connectionCheckerWidget(state, context);
+      },
       builder: (context, state) {
         var homeCubit = BlocProvider.of<HomeCubit>(context);
         return Scaffold(
@@ -67,4 +72,6 @@ class HomeLayout extends StatelessWidget {
       },
     );
   }
+
+ 
 }

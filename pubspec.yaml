@@ -34,6 +34,7 @@ dependencies:
   connectivity_plus: ^3.0.3
   page_animation_transition: ^0.0.9
   loading_animation_widget: ^1.2.0+4
+  awesome_dialog: ^3.0.2
 
 dev_dependencies:
   flutter_test:

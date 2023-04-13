@@ -16,6 +16,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
+        var homeCubit = BlocProvider.of<HomeCubit>(context);
         if (state is HomeFavoriteChangeSuccessState) {
           if (!state.favoriteIConModel.status!) {
             CustomToastWidget.getToast(
@@ -34,6 +35,7 @@ class HomeView extends StatelessWidget {
           },
           widgetBuilder: (context) {
             return HomeViewBody(
+              state: state,
               homeModel: homeCubit.homeModel!,
               homeCategoriesModel: categoryCubit.homeCategoriesModel!,
             );

@@ -8,7 +8,7 @@ import 'package:read_more_text/read_more_text.dart';
 
 import 'package:xstore_cubit/core/app_managers/assets_manager.dart';
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
-import 'package:xstore_cubit/features/cart/presentation/viewmodel/Cart_Cubit/cart_cubit.dart';
+import 'package:xstore_cubit/core/constants.dart';
 import 'package:xstore_cubit/features/products/presentation/viewmodel/home/home_cubit.dart';
 
 import '../../../data/models/home_model/home_model.dart';
@@ -25,10 +25,10 @@ class DetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {},
       builder: (context, state) {
         var cubit = BlocProvider.of<HomeCubit>(context);
-
         if (homeModel != null) {
           return Scaffold(
             appBar: _appbar(homeModel, index),
@@ -83,14 +83,19 @@ class DetailsView extends StatelessWidget {
                           IconButton(
                             padding: EdgeInsets.zero,
                             onPressed: () {
-                              cubit.addOrRemoveFavorites(
-                                  productID: homeModel
-                                      .data!.products![index].id!
-                                      .toString());
+                              if (BlocProvider.of<HomeCubit>(context)
+                                      .isConnected! ==
+                                  true) {
+                                cubit.changeFavorite(
+                                    productID:
+                                        homeModel.data!.products![index].id!);
+                              } else {
+                                connectionCheckerWidget(state, context);
+                              }
                             },
-                            icon: cubit.favoritesID.contains(homeModel
-                                    .data!.products![index].id!
-                                    .toString())
+                            icon: cubit.favorites[
+                                        homeModel.data!.products![index].id!] ==
+                                    true
                                 ? const Icon(
                                     Icons.favorite,
                                     color: Colors.red,
@@ -178,38 +183,55 @@ class DetailsView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 12.h),
-                    child: MaterialButton(
+               
+                  BlocConsumer<HomeCubit, HomeState>(
+                    listener: (context, state) {},
+                    builder: (context, state) => Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 8.0.w, vertical: 12.h),
+                      child: MaterialButton(
                         shape: const StadiumBorder(),
                         minWidth: double.infinity,
                         height: 40.h,
                         onPressed: () {
-                          BlocProvider.of<CartCubit>(context)
+                         if(cubit.isConnected!){
+                            cubit
                               .addOrRemoveCartItem(
                                   productID:
-                                      homeModel.data!.products![index].id!);
+                                    homeModel.data!.products![index].id );
+                         }else{
+                           connectionCheckerWidget(state, context);
+                         }
                         },
                         color: ColorsManager.kprimaryColor,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              ImagesManager.cart,
-                              width: 25.w,
-                              color: Colors.white,
+                             cubit.cart[homeModel
+                                          .data!.products![index].id!] ==
+                                      true
+                                  ? ImagesManager.shoppingcartIcon
+                                  : ImagesManager.emptycartIcon,
+                              width: 30.w,
+                              // color: Colors.white,
                             ),
                             SizedBox(
                               width: 5.w,
                             ),
                             Text(
-                              'Add to cart',
+                              cubit.cart[homeModel
+                                          .data!.products![index].id!] ==
+                                      true
+                                  ? 'Remove from cart'
+                                  : 'Add to cart',
                               style: TextStyle(
                                   color: Colors.white, fontSize: 25.sp),
                             )
                           ],
-                        )),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -234,7 +256,7 @@ class DetailsView extends StatelessWidget {
             width: 5.w,
           ),
           Hero(
-            tag:  model.data!.products![index].id.toString(),
+            tag: model.data!.products![index].id.toString(),
             child: Container(
               width: 50,
               height: 50,

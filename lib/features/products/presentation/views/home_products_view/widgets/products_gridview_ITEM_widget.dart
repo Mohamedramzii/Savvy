@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
+import 'package:xstore_cubit/features/Auth/presentation/views/widgets/custom_Toast_Widget.dart';
+
 import 'package:xstore_cubit/features/products/presentation/views/details_view/detailsView.dart';
 
 import '../../../../../../core/app_managers/assets_manager.dart';
@@ -15,9 +18,11 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
     Key? key,
     required this.homeModel,
     required this.index,
+    required this.state,
   }) : super(key: key);
   final HomeModel homeModel;
   final int index;
+  final HomeState state;
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +45,13 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
                   child: Hero(
                     tag: homeModel.data!.products![index].id.toString(),
                     child: CachedNetworkImage(
-                        imageUrl: homeModel.data!.products![index].image!,
-                        width: double.infinity,
-                        height: 180.h,
-                        fit: BoxFit.fill,
-                        placeholder: (context, url) =>
-                            Lottie.asset(ImagesManager.imageLoading2),
-                      ),
+                      imageUrl: homeModel.data!.products![index].image!,
+                      width: double.infinity,
+                      height: 180.h,
+                      fit: BoxFit.fill,
+                      placeholder: (context, url) =>
+                          Lottie.asset(ImagesManager.imageLoading2),
+                    ),
                   ),
                 ),
                 if (homeModel.data!.products![index].discount != 0)
@@ -100,19 +105,47 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
                           fontSize: 13),
                     ),
                   const Spacer(),
+                  // Expanded(
+                  //   child: IconButton(
+                  //     padding: EdgeInsets.zero,
+                  //     onPressed: () {
+                  //       if (BlocProvider.of<HomeCubit>(context).isConnected! ==
+                  //           true) {
+                  //         BlocProvider.of<HomeCubit>(context)
+                  //             .addOrRemoveFavorites(
+                  //                 productID: homeModel
+                  //                     .data!.products![index].id!
+                  //                     .toString());
+                  //       } else {
+                  //         connectionCheckerWidget(state, context);
+                  //       }
+                  //     },
+                  //     icon: BlocProvider.of<HomeCubit>(context)
+                  //             .favoritesID
+                  //             .contains(homeModel.data!.products![index].id!
+                  //                 .toString())
+                  //
+                  //             ? const Icon(
+                  //                 Icons.favorite,
+                  //                 color: Colors.red,
+                  //               )
+                  //         : const Icon(Icons.favorite_border),
+                  //   ),
+                  // )
                   Expanded(
                     child: IconButton(
                       padding: EdgeInsets.zero,
                       onPressed: () {
-                        BlocProvider.of<HomeCubit>(context)
-                            .addOrRemoveFavorites(
-                                productID: homeModel.data!.products![index].id!
-                                    .toString());
+                        if (BlocProvider.of<HomeCubit>(context).isConnected!) {
+                          BlocProvider.of<HomeCubit>(context).changeFavorite(
+                              productID: homeModel.data!.products![index].id!);
+                        } else {
+                          connectionCheckerWidget(state, context);
+                        }
                       },
-                      icon: BlocProvider.of<HomeCubit>(context)
-                              .favoritesID
-                              .contains(homeModel.data!.products![index].id!
-                                  .toString())
+                      icon: BlocProvider.of<HomeCubit>(context).favorites[
+                                  homeModel.data!.products![index].id] ==
+                              true
                           ? const Icon(
                               Icons.favorite,
                               color: Colors.red,
@@ -120,24 +153,6 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
                           : const Icon(Icons.favorite_border),
                     ),
                   )
-                  // Expanded(
-                  //   child: IconButton(
-                  //     padding: EdgeInsets.zero,
-                  //     onPressed: () {
-                  //       BlocProvider.of<HomeCubit>(context).changeFavorite(
-                  //           productID: homeModel.data!.products![index].id!);
-                  //     },
-                  //     icon:
-                  //      BlocProvider.of<HomeCubit>(context).favorites[
-                  //                 homeModel.data!.products![index].id] ==
-                  //             true
-                  //         ? const Icon(
-                  //             Icons.favorite,
-                  //             color: Colors.red,
-                  //           )
-                  //         : const Icon(Icons.favorite_border),
-                  //   ),
-                  // )
                 ],
               ),
             )
@@ -146,4 +161,13 @@ class ProductsGridViewItemsWidget extends StatelessWidget {
       ),
     );
   }
+
+  // void _CheckConnectedOrNotToAddOrRemoveFavorites(BuildContext context,state) {
+  //   if (state is AppInternetConnectionConnected) {
+  //     BlocProvider.of<HomeCubit>(context).addOrRemoveFavorites(
+  //         productID: homeModel.data!.products![index].id!.toString());
+  //   } else if (state is AppInternetConnectionNone) {
+  //     connectionCheckerWidget(state, context);
+  //   }
+  // }
 }

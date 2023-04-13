@@ -5,6 +5,7 @@ import 'package:xstore_cubit/core/app_managers/color_manager.dart';
 
 import '../../../../categories/data/models/homeCategoriesModel.dart';
 import '../../../data/models/home_model/home_model.dart';
+import '../../viewmodel/home/home_cubit.dart';
 import 'widgets/custom_carousel_widget.dart';
 import 'widgets/custom_homeCategories_Listview_widget.dart';
 import 'widgets/products_gridview_widget.dart';
@@ -14,9 +15,11 @@ class HomeViewBody extends StatelessWidget {
     Key? key,
     required this.homeModel,
     required this.homeCategoriesModel,
+    required this.state,
   }) : super(key: key);
   final HomeModel homeModel;
   final HomeCategoriesModel homeCategoriesModel;
+  final HomeState state;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -50,7 +53,7 @@ class HomeViewBody extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                     color: ColorsManager.kprimaryColor)),
           ),
-          ProductsGridViewWidget(homeModel: homeModel)
+          ProductsGridViewWidget(homeModel: homeModel,state:state)
         ],
       ),
     );

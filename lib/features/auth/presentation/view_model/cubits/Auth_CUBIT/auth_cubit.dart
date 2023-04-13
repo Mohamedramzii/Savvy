@@ -32,7 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
   }) async {
     emit(LoginLoadingState());
-    await DioHelper.postData(
+     DioHelper.postData(
       url: EndPoints.LOGIN,
       data: {
         'email': email,
@@ -61,7 +61,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String phone,
   }) async {
     emit(RegisterLoadingState());
-    await DioHelper.postData(
+     DioHelper.postData(
       url: EndPoints.REGISTER,
       data: {
         'email': email,

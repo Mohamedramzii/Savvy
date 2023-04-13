@@ -1,4 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,11 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xstore_cubit/core/app_managers/app_theme.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
-import 'package:xstore_cubit/features/cart/presentation/viewmodel/Cart_Cubit/cart_cubit.dart';
-
 import 'core/constants.dart';
 import 'core/networks/local/cache_helper.dart';
-import 'core/networks/network_checker/internet_connection_checker_stream.dart';
 import 'features/categories/presentation/viewmodel/cubits/categories_Cubit/categories_cubit.dart';
 import 'features/onBoarding/presentation/views/onBoarding_view.dart';
 import 'features/products/presentation/viewmodel/home/home_cubit.dart';
@@ -19,6 +16,7 @@ import 'features/settings/presentation/viewmodel/cubit/settings_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // HttpOverrides.global = MyHttpOverrides();
   DioHelper.init();
   await CacheHelper.init();
   // var res=await CheckInternet();
@@ -40,7 +38,6 @@ void main() async {
   }
 
   runApp(MyApp(
-    // startWidget: res ? widget: const Scaffold(body: Center(child: Text('No Intenet'),),),
     startWidget: widget,
   ));
 }
@@ -62,15 +59,13 @@ class MyApp extends StatelessWidget {
           BlocProvider<HomeCubit>(
               create: (context) => HomeCubit()
                 ..getHomeData()
-                ..getFavorites2()),
+                ..getFavorites()
+                ..getCart()),
           BlocProvider<CategoriesCubit>(
             create: (context) => CategoriesCubit()..getHomeCategories(),
           ),
           BlocProvider<SettingsCubit>(
             create: (context) => SettingsCubit()..getUserData(),
-          ),
-          BlocProvider<CartCubit>(
-            create: (context) => CartCubit()..getCart(),
           ),
         ],
         child: MaterialApp(
@@ -80,12 +75,21 @@ class MyApp extends StatelessWidget {
             theme: APPTHEMES.lightMode,
             darkTheme: APPTHEMES.darkMode,
             themeMode: ThemeMode.light,
-            home: InternetConnectionCheckerStream(
-              widget: startWidget!,
-            )
+            home: startWidget
+            // home: InternetConnectionCheckerStream(
+            //   widget: startWidget!,
+            // )
             // startWidget
             ),
       ),
     );
   }
 }
+// class MyHttpOverrides extends HttpOverrides {
+//   @override
+//    HttpClient CreateHttpClient(SecurityContext context) {
+//     return super.createHttpClient(context)
+//       ..badCertificateCallback =
+//           (X509Certificate cert, String host, int port) => true;
+//   }
+// }

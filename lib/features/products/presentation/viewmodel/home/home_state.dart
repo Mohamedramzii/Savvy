@@ -92,3 +92,27 @@ class GetFav2FailureState extends HomeState {}
 class AddOrDeleteFavoritesSuccessState extends HomeState {}
 
 class AddOrDeleteFavoritesFailureState extends HomeState {}
+
+
+
+
+
+//Internet Connection
+class AppInternetConnectionNone extends HomeState {}
+class AppInternetConnectionConnected extends HomeState {}
+
+
+// Cart
+class GetCartDataLoadingState extends HomeState {}
+
+class GetCartDataSuccessState extends HomeState {}
+
+class GetCartDataFailureState extends HomeState {}
+
+
+
+class AddOrDeleteCartItemDataSuccessState extends HomeState {}
+
+class AddOrDeleteCartItemDataLoadingState extends HomeState {}
+
+class AddOrDeleteCartItemDataFailureState extends HomeState {}

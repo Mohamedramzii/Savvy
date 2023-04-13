@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../data/models/home_model/home_model.dart';
+import '../../../viewmodel/home/home_cubit.dart';
 import 'products_gridview_ITEM_widget.dart';
 
 class ProductsGridViewWidget extends StatelessWidget {
   const ProductsGridViewWidget({
     Key? key,
     required this.homeModel,
+    required this.state,
   }) : super(key: key);
   final HomeModel homeModel;
+  final HomeState state;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class ProductsGridViewWidget extends StatelessWidget {
       children: List.generate(
           homeModel.data!.products!.length,
           (index) =>
-              ProductsGridViewItemsWidget(homeModel: homeModel, index: index)),
+              ProductsGridViewItemsWidget(homeModel: homeModel, index: index,state:state)),
     );
   }
 }

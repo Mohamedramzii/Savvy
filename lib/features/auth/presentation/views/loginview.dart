@@ -4,14 +4,16 @@ import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:xstore_cubit/core/app_managers/color_manager.dart';
-import 'package:xstore_cubit/features/settings/presentation/views/change_password_view.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/registerview.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toast_Widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_button_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_haveaccount_widget.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_textformfield_widget.dart';
+import 'package:xstore_cubit/features/auth/presentation/views/widgets/routingclass.dart';
+import 'package:xstore_cubit/features/products/presentation/viewmodel/home/home_cubit.dart';
 
 import '../../../../core/constants.dart';
+import '../../../../main.dart';
 import '../../../products/presentation/views/home_products_view/home_layout.dart';
 import '../view_model/cubits/Auth_CUBIT/auth_cubit.dart';
 import '../view_model/cubits/Auth_CUBIT/auth_state.dart';
@@ -42,8 +44,8 @@ class LoginView extends StatelessWidget {
                 // debugPrint('userToken: ${state.authModel.userData!.token}');
 
                 // then we navigate to our home layout
-                Navigation.navigationWithoutReturn(context,
-                    screen: const HomeLayout());
+               Navigator.pushAndRemoveUntil(context,RootRoute(), (route) => false);
+               BlocProvider.of<HomeCubit>(context).getHomeData();
                 // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeLayout(),));
               }
               //  else {
