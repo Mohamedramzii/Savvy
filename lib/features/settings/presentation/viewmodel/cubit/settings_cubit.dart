@@ -67,15 +67,12 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(LogoutSuccessState());
   }
 
-
-  
   String? message;
   bool? status;
-  changePassword({
-    required String currentPassword,
-    required String newPassword,
-    required context
-  }) {
+  changePassword(
+      {required String currentPassword,
+      required String newPassword,
+      required context}) {
     emit(ChangePasswordLoadingState());
     DioHelper.postData(
         url: EndPoints.CHANGEPASSWORD,
@@ -95,12 +92,26 @@ class SettingsCubit extends Cubit<SettingsState> {
     });
   }
 
-
   bool isHidden2 = true;
   visibilityChange2() {
     isHidden2 = !isHidden2;
-   
+
     debugPrint('isHidden2 ? $isHidden2');
     emit(ChangePasswordVisibilityIconState());
+  }
+
+  bool isDark = false;
+  bool modeChange({bool? fromshared}) {
+    if (fromshared != null) {
+      // isDark = fromshared;
+      emit(ThemModeChangedSuccessfully());
+      return isDark=fromshared;
+    } else {
+      // isDark = !isDark;
+      debugPrint('isDark: $isDark');
+      CacheHelper.saveData(key: 'isDark', value: isDark)
+          .then((value) => emit(ThemModeChangedSuccessfully()));
+      return isDark=!isDark;
+    }
   }
 }

@@ -20,7 +20,6 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
 
   //Checking for Connections
-  
   final Connectivity _connectivity = Connectivity();
   StreamSubscription<ConnectivityResult>? _subscription;
 
@@ -48,8 +47,6 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   //////////////////////////////////////////////////
-
-  // FavoriteCubit favoriteCubit;
 
   int currentIndex = 0;
 

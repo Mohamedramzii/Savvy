@@ -41,3 +41,7 @@ class ChangePasswordLoadingState extends SettingsState {}
 
 class ChangePasswordFailureState extends SettingsState {}
 class ChangePasswordVisibilityIconState extends SettingsState{}
+
+
+
+class ThemModeChangedSuccessfully extends SettingsState{}

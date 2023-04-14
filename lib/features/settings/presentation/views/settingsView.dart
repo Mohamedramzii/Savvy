@@ -30,7 +30,7 @@ class SettingsView extends StatelessWidget {
                 child: Center(
                   child: SizedBox(
                     width: double.infinity,
-                    height: 300.h,
+                    height: 270.h,
                     child: Card(
                       elevation: 10,
                       shape: RoundedRectangleBorder(
@@ -90,7 +90,7 @@ class SettingsView extends StatelessWidget {
                             height: 10.h,
                           ),
                           const CustomAccountSettingsWidget(),
-                          const CustomDarkModeWidget(),
+                          // const CustomDarkModeWidget(),
                           SizedBox(
                             height: 20.h,
                           ),

@@ -2,7 +2,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:xstore_cubit/core/app_managers/app_theme.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/loginview.dart';
@@ -19,7 +18,8 @@ void main() async {
   // HttpOverrides.global = MyHttpOverrides();
   DioHelper.init();
   await CacheHelper.init();
-  // var res=await CheckInternet();
+
+  bool? isDark = CacheHelper.getData(key: 'isDark');
 
   Widget? widget;
   bool? onBoarding = CacheHelper.getData(key: onBoardingKey) ?? false;
@@ -39,6 +39,7 @@ void main() async {
 
   runApp(MyApp(
     startWidget: widget,
+    isDark: isDark,
   ));
 }
 
@@ -46,9 +47,11 @@ class MyApp extends StatelessWidget {
   MyApp({
     Key? key,
     this.startWidget,
+    this.isDark,
   }) : super(key: key);
 
   Widget? startWidget;
+  bool? isDark;
 
   @override
   Widget build(BuildContext context) {
@@ -65,22 +68,28 @@ class MyApp extends StatelessWidget {
             create: (context) => CategoriesCubit()..getHomeCategories(),
           ),
           BlocProvider<SettingsCubit>(
-            create: (context) => SettingsCubit()..getUserData(),
+            create: (context) => SettingsCubit()
+              ..modeChange(fromshared: isDark)
+              ..getUserData(),
           ),
         ],
-        child: MaterialApp(
-            // routerConfig: AppRouter.router,
-            debugShowCheckedModeBanner: false,
-            title: 'Savvy',
-            theme: APPTHEMES.lightMode,
-            darkTheme: APPTHEMES.darkMode,
-            themeMode: ThemeMode.light,
-            home: startWidget
-            // home: InternetConnectionCheckerStream(
-            //   widget: startWidget!,
-            // )
-            // startWidget
-            ),
+        child: BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, state) => MaterialApp(
+              // routerConfig: AppRouter.router,
+              debugShowCheckedModeBanner: false,
+              title: 'Savvy',
+              theme: APPTHEMES.lightMode,
+              darkTheme: APPTHEMES.darkMode,
+              themeMode: BlocProvider.of<SettingsCubit>(context).isDark ==true
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+              home: startWidget
+              // home: InternetConnectionCheckerStream(
+              //   widget: startWidget!,
+              // )
+              // startWidget
+              ),
+        ),
       ),
     );
   }
