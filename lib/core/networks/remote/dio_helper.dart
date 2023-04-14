@@ -1,6 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 
 class DioHelper {
   static Dio dio=Dio();
@@ -37,12 +36,12 @@ class DioHelper {
     String? lang = 'en',
     String? token,
   }) async {
-    dio!.options.headers = {
+    dio.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
       'Authorization': token,
     };
-    return await dio!.get(url, queryParameters: query);
+    return await dio.get(url, queryParameters: query);
   }
 
   static Future<Response> postData({
@@ -52,12 +51,12 @@ class DioHelper {
     String? lang = 'en',
     String? token,
   }) async {
-    dio!.options.headers = {
+    dio.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
       'Authorization': token,
     };
-    return await dio!.post(
+    return await dio.post(
       url,
       queryParameters: query,
       data: data,
@@ -71,12 +70,12 @@ class DioHelper {
     String? lang = 'en',
     String? token,
   }) async {
-    dio!.options.headers = {
+    dio.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
       'Authorization': token,
     };
-    return await dio!.put(
+    return await dio.put(
       url,
       queryParameters: query,
       data: data,

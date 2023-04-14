@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xstore_cubit/core/constants.dart';
 import 'package:xstore_cubit/core/networks/remote/dio_helper.dart';
 import 'package:xstore_cubit/features/auth/presentation/views/widgets/custom_Toast_Widget.dart';
-import '../../../../cart/data/models/cart_model/cart_item.dart';
-import '../../../../cart/data/models/cart_model/cart_model.dart';
+import '../../../data/models/cart_model/cart_item.dart';
+import '../../../data/models/cart_model/cart_model.dart';
 import '../../../data/models/favorite_models/favoriteIconModel.dart';
 import '../../../data/models/favorite_models/favoriteModel.dart';
 import '../../../../settings/presentation/views/settingsView.dart';
@@ -18,6 +18,9 @@ import '../../views/home_products_view/homeView.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
+
+  //Checking for Connections
+  
   final Connectivity _connectivity = Connectivity();
   StreamSubscription<ConnectivityResult>? _subscription;
 

@@ -101,23 +101,7 @@ class CustomFavoritesListViewITEMWidget extends StatelessWidget {
                                   fontSize: 13),
                         ),
                       const Spacer(),
-                      // IconButton(
-                      //   padding: EdgeInsets.zero,
-                      //   onPressed: () {
-                      //     BlocProvider.of<HomeCubit>(context)
-                      //         .addOrRemoveFavorites(
-
-                      //             productID: favoriteModel.product!.id.toString());
-                      //   },
-                      //   icon: BlocProvider.of<HomeCubit>(context)
-                      //           .favoritesID
-                      //           .contains(favoriteModel.product!.id.toString())
-                      //       ? const Icon(
-                      //           Icons.favorite,
-                      //           color: Colors.red,
-                      //         )
-                      //       : const Icon(Icons.favorite_border),
-                      // ),
+              
                       IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {

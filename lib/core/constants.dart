@@ -42,6 +42,10 @@ const tokenKey = 'token';
 String? tokenHolder = '';
 bool? onBoarding;
 
+
+
+// lines below must be in their organized files
+
 void connectionCheckerWidget(HomeState state, BuildContext context) {
   if (state is AppInternetConnectionNone) {
     AwesomeDialog(

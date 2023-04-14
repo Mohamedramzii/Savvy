@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../core/app_managers/assets_manager.dart';
-import '../../../../../cart/data/models/cart_model/cart_item.dart';
+import '../../../../data/models/cart_model/cart_item.dart';
 
 
 class CartViewItemWidget extends StatelessWidget {
